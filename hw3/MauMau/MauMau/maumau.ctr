@@ -1794,3 +1794,6 @@ u3;;i:Oq1VD#C53;information;v::96;-;v:java.lang.String:location_Y;i:Oq1VD#453;
 t;Oq1VD#D53;drag;1286015744685;-;;
 u3;;i:Oq1VD#853;information;v::158;v::20;v:java.lang.String:location_X;i:Oq1VD#D53;
 u3;;i:Oq1VD#853;information;v::657;v::33;v:java.lang.String:location_Y;i:Oq1VD#D53;
+t;Oq1VD#E53;drag;1286015786608;-;;
+c3;;i:Oq1VD#613;information;v::706;v::734;v:java.lang.String:location_X;i:Oq1VD#E53;
+c3;;i:Oq1VD#613;information;v::0;v::13;v:java.lang.String:location_Y;i:Oq1VD#E53;
