@@ -3,12 +3,126 @@
  */
 import de.uni_kassel.features.annotation.util.Property; // requires Fujaba5/libs/features.jar in classpath
 import de.uni_kassel.features.ReferenceHandler; // requires Fujaba5/libs/features.jar in classpath
+import java.util.*;
+import de.upb.tools.fca.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
 
 
 public class Dealer
 {
 
 
+
+   /**
+    * <pre>
+    *           0..1     holds     0..n
+    * Dealer ------------------------- Deck
+    *           dealer               holds
+    * </pre>
+    */
+   public static final String PROPERTY_HOLDS = "holds";
+
+   @Property( name = PROPERTY_HOLDS, partner = Deck.PROPERTY_DEALER, kind = ReferenceHandler.ReferenceKind.TO_MANY,
+         adornment = ReferenceHandler.Adornment.NONE)
+   private FHashSet<Deck> holds;
+
+   @Property( name = PROPERTY_HOLDS )
+   public Set<? extends Deck> getHolds()
+   {
+      return ((this.holds == null)
+              ? Collections.EMPTY_SET
+              : Collections.unmodifiableSet(this.holds));
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public boolean addToHolds (Deck value)
+   {
+      boolean changed = false;
+
+      if (value != null)
+      {
+         if (this.holds == null)
+         {
+            this.holds = new FHashSet<Deck> ();
+
+         }
+      
+         changed = this.holds.add (value);
+         if (changed)
+         {
+            value.setDealer (this);
+         }
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public Dealer withHolds (Deck value)
+   {
+      addToHolds (value);
+      return this;
+   }
+
+   public Dealer withoutHolds (Deck value)
+   {
+      removeFromHolds (value);
+      return this;
+   }
+
+
+   public boolean removeFromHolds (Deck value)
+   {
+      boolean changed = false;
+
+      if ((this.holds != null) && (value != null))
+      {
+      
+         changed = this.holds.remove (value);
+         if (changed)
+         {
+            value.setDealer (null);
+         }
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public void removeAllFromHolds (){
+   
+      Deck tmpValue;
+      Iterator<? extends Deck> iter = this.iteratorOfHolds ();
+      while (iter.hasNext ())
+      {
+         tmpValue = (Deck) iter.next ();
+         this.removeFromHolds (tmpValue);
+      }
+   
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public boolean hasInHolds (Deck value)
+   {
+      return ((this.holds != null) &&
+              (value != null) &&
+              this.holds.contains (value));
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public Iterator<? extends Deck> iteratorOfHolds ()
+   {
+      return ((this.holds == null)
+              ? FEmptyIterator.<Deck>get ()
+              : this.holds.iterator ());
+   }
+
+   @Property( name = PROPERTY_HOLDS )
+   public int sizeOfHolds ()
+   {
+      return ((this.holds == null)
+              ? 0
+              : this.holds.size ());
+   }
 
    /**
     * <pre>
@@ -64,6 +178,7 @@ public class Dealer
 
    public void removeYou()
    {
+      this.removeAllFromHolds ();
       this.setPlayer (null);
    }
 }

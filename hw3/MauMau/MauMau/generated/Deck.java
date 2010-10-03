@@ -62,9 +62,62 @@ public class Deck
       return this.card;
    }
 
+   /**
+    * <pre>
+    *           0..n     holds     0..1
+    * Deck ------------------------- Dealer
+    *           holds               dealer
+    * </pre>
+    */
+   public static final String PROPERTY_DEALER = "dealer";
+
+   @Property( name = PROPERTY_DEALER, partner = Dealer.PROPERTY_HOLDS, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+         adornment = ReferenceHandler.Adornment.NONE)
+   private Dealer dealer;
+
+   @Property( name = PROPERTY_DEALER )
+   public boolean setDealer (Dealer value)
+   {
+      boolean changed = false;
+
+      if (this.dealer != value)
+      {
+      
+         Dealer oldValue = this.dealer;
+         Deck source = this;
+         if (this.dealer != null)
+         {
+            this.dealer = null;
+            oldValue.removeFromHolds (this);
+         }
+         this.dealer = value;
+
+         if (value != null)
+         {
+            value.addToHolds (this);
+         }
+         changed = true;
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_DEALER )
+   public Deck withDealer (Dealer value)
+   {
+      setDealer (value);
+      return this;
+   }
+
+   public Dealer getDealer ()
+   {
+      return this.dealer;
+   }
+
    public void removeYou()
    {
       this.setCard (null);
+      this.setDealer (null);
    }
 }
 

@@ -176,6 +176,58 @@ public class Player
       return this.dealer;
    }
 
+   /**
+    * <pre>
+    *           0..1     is     0..1
+    * Player ------------------------- Dealer
+    *           player               dealer
+    * </pre>
+    */
+   public static final String PROPERTY_DEALER = "dealer";
+
+   @Property( name = PROPERTY_DEALER, partner = Dealer.PROPERTY_PLAYER, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+         adornment = ReferenceHandler.Adornment.NONE)
+   private Dealer dealer;
+
+   @Property( name = PROPERTY_DEALER )
+   public boolean setDealer (Dealer value)
+   {
+      boolean changed = false;
+
+      if (this.dealer != value)
+      {
+      
+         Dealer oldValue = this.dealer;
+         Player source = this;
+         if (this.dealer != null)
+         {
+            this.dealer = null;
+            oldValue.setPlayer (null);
+         }
+         this.dealer = value;
+
+         if (value != null)
+         {
+            value.setPlayer (this);
+         }
+         changed = true;
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_DEALER )
+   public Player withDealer (Dealer value)
+   {
+      setDealer (value);
+      return this;
+   }
+
+   public Dealer getDealer ()
+   {
+      return this.dealer;
+   }
+
    public static final String PROPERTY_NAME = "name";
 
    @Property( name = PROPERTY_NAME, kind = ReferenceHandler.ReferenceKind.ATTRIBUTE )
@@ -306,6 +358,7 @@ public class Player
    public void removeYou()
    {
       this.removeAllFromCard ();
+      this.setDealer (null);
       this.setDealer (null);
       this.setPlayer (null);
       this.setTurn (null);
