@@ -26,6 +26,8 @@ public class maumauAllTests
          suite = new TestSuite ( );
 
          // collabStat call
+         suite.addTestSuite (ArtjomPlaysAn8AndEeroSkipsATurnTest.class);
+         // collabStat call
          suite.setName ("maumauAllTests");
          // collabStat call
          suite.addTestSuite (UulnoPlays7ForcingArtjomDraw2CardsTest.class);

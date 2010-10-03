@@ -939,7 +939,7 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
       catch ( JavaSDMException fujaba__InternalException )
       {
          fujaba__Success = false;
-      }de
+      }
 
    }
 
