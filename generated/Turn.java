@@ -10,6 +10,16 @@ public class Turn
 
 
 
+   private  Turn ()
+   {
+   }
+
+   public static Turn getInstance ()
+   {
+
+      return turn;
+   }
+
    /**
     * <pre>
     *           0..1     has     0..1
@@ -61,6 +71,12 @@ public class Turn
    {
       return this.player;
    }
+
+   public static final String PROPERTY_TURN = "turn";
+
+   @Property( name = PROPERTY_TURN, kind = ReferenceHandler.ReferenceKind.ATTRIBUTE )
+   private static Turn turn = new Turn();
+
 
    public void removeYou()
    {
