@@ -754,6 +754,9 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
          // check isomorphic binding between objects HQ and DK
          JavaSDM.ensure ( !HQ.equals (DK), "check isomorphic binding between objects HQ and DK" );
 
+         // check isomorphic binding between objects Open_deck and Deck
+         JavaSDM.ensure ( !Open_deck.equals (Deck), "check isomorphic binding between objects Open_deck and Deck" );
+
          // check isomorphic binding between objects Ulno and Eero
          JavaSDM.ensure ( !Ulno.equals (Eero), "check isomorphic binding between objects Ulno and Eero" );
 
@@ -811,6 +814,12 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
          // check link on top of from HQ to HK
          JavaSDM.ensure (HK.equals (HQ.getCard ()), "check link on top of from HQ to HK");
 
+         // check link on top from HJ to Open_deck
+         JavaSDM.ensure (Open_deck.equals (HJ.getDeck ()), "check link on top from HJ to Open_deck");
+
+         // check link on top from HQ to Deck
+         JavaSDM.ensure (Deck.equals (HQ.getDeck ()), "check link on top from HQ to Deck");
+
          // check link right of from Eero to Artjom
          JavaSDM.ensure (Artjom.equals (Eero.getPlayer ()), "check link right of from Eero to Artjom");
 
@@ -849,11 +858,11 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
       Card C7 = null;
       Turn CurrentTurn = null;
       Deck Deck = null;
+      Card HQ = null;
       Deck Open_deck = null;
       Card HJ = null;
       Card DK = null;
       Card HK = null;
-      Card HQ = null;
 
       // // start situation: 
       // story pattern 
@@ -891,6 +900,9 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
          // create object Deck
          Deck = new Deck ( );
 
+         // create object HQ
+         HQ = new Card ( );
+
          // create object Open_deck
          Open_deck = new Deck ( );
 
@@ -902,9 +914,6 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
 
          // create object HK
          HK = new Card ( );
-
-         // create object HQ
-         HQ = new Card ( );
 
          // create link right of from Ulno to Eero
          Ulno.setPlayer (Eero);
@@ -957,8 +966,14 @@ public class ArtjomPlaysAn8AndEeroSkipsATurnTest extends TestCase
          // create link object_H10 from this to H10
          this.setH10 (H10);
 
+         // create link on top from HQ to Deck
+         HQ.setDeck (Deck);
+
          // create link object_Deck from this to Deck
          this.setDeck (Deck);
+
+         // create link on top from HJ to Open_deck
+         HJ.setDeck (Open_deck);
 
          // create link object_Open_deck from this to Open_deck
          this.setOpen_deck (Open_deck);

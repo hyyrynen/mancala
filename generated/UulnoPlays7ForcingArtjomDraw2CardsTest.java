@@ -137,47 +137,6 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
 
    /**
     * <pre>
-    *           0..1     object_Closed     0..1
-    * UulnoPlays7ForcingArtjomDraw2CardsTest ------------------------> Deck
-    *           test               Closed
-    * </pre>
-    */
-   public static final String PROPERTY_CLOSED = "Closed";
-
-   @Property( name = PROPERTY_CLOSED, kind = ReferenceHandler.ReferenceKind.TO_ONE,
-         adornment = ReferenceHandler.Adornment.NONE)
-   private Deck Closed;
-
-   @Property( name = PROPERTY_CLOSED )
-   public boolean setClosed (Deck value)
-   {
-      boolean changed = false;
-
-      if (this.Closed != value)
-      {
-      
-         Deck oldValue = this.Closed;
-         this.Closed = value;
-         changed = true;
-      
-      }
-      return changed;
-   }
-
-   @Property( name = PROPERTY_CLOSED )
-   public UulnoPlays7ForcingArtjomDraw2CardsTest withClosed (Deck value)
-   {
-      setClosed (value);
-      return this;
-   }
-
-   public Deck getClosed ()
-   {
-      return this.Closed;
-   }
-
-   /**
-    * <pre>
     *           0..1     object_CurrentTurn     0..1
     * UulnoPlays7ForcingArtjomDraw2CardsTest ------------------------> Turn
     *           test               CurrentTurn
@@ -420,6 +379,47 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
    public Card getDQ ()
    {
       return this.DQ;
+   }
+
+   /**
+    * <pre>
+    *           0..1     object_Deck     0..1
+    * UulnoPlays7ForcingArtjomDraw2CardsTest ------------------------> Deck
+    *           test               Deck
+    * </pre>
+    */
+   public static final String PROPERTY_DECK = "Deck";
+
+   @Property( name = PROPERTY_DECK, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+         adornment = ReferenceHandler.Adornment.NONE)
+   private Deck Deck;
+
+   @Property( name = PROPERTY_DECK )
+   public boolean setDeck (Deck value)
+   {
+      boolean changed = false;
+
+      if (this.Deck != value)
+      {
+      
+         Deck oldValue = this.Deck;
+         this.Deck = value;
+         changed = true;
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_DECK )
+   public UulnoPlays7ForcingArtjomDraw2CardsTest withDeck (Deck value)
+   {
+      setDeck (value);
+      return this;
+   }
+
+   public Deck getDeck ()
+   {
+      return this.Deck;
    }
 
    /**
@@ -670,43 +670,43 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
 
    /**
     * <pre>
-    *           0..1     object_Open     0..1
+    *           0..1     object_Open_deck     0..1
     * UulnoPlays7ForcingArtjomDraw2CardsTest ------------------------> Deck
-    *           test               Open
+    *           test               Open_deck
     * </pre>
     */
-   public static final String PROPERTY_OPEN = "Open";
+   public static final String PROPERTY_OPEN_DECK = "Open_deck";
 
-   @Property( name = PROPERTY_OPEN, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+   @Property( name = PROPERTY_OPEN_DECK, kind = ReferenceHandler.ReferenceKind.TO_ONE,
          adornment = ReferenceHandler.Adornment.NONE)
-   private Deck Open;
+   private Deck Open_deck;
 
-   @Property( name = PROPERTY_OPEN )
-   public boolean setOpen (Deck value)
+   @Property( name = PROPERTY_OPEN_DECK )
+   public boolean setOpen_deck (Deck value)
    {
       boolean changed = false;
 
-      if (this.Open != value)
+      if (this.Open_deck != value)
       {
       
-         Deck oldValue = this.Open;
-         this.Open = value;
+         Deck oldValue = this.Open_deck;
+         this.Open_deck = value;
          changed = true;
       
       }
       return changed;
    }
 
-   @Property( name = PROPERTY_OPEN )
-   public UulnoPlays7ForcingArtjomDraw2CardsTest withOpen (Deck value)
+   @Property( name = PROPERTY_OPEN_DECK )
+   public UulnoPlays7ForcingArtjomDraw2CardsTest withOpen_deck (Deck value)
    {
-      setOpen (value);
+      setOpen_deck (value);
       return this;
    }
 
-   public Deck getOpen ()
+   public Deck getOpen_deck ()
    {
-      return this.Open;
+      return this.Open_deck;
    }
 
    /**
@@ -762,15 +762,15 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
       Card DJ = null;
       Card HK = null;
       Card HQ = null;
-      Deck Open = null;
-      Deck Closed = null;
+      Deck Open_deck = null;
       Card HA = null;
+      Deck Deck = null;
+      Card D9 = null;
       Card C8 = null;
       Card H10 = null;
       Card DK = null;
       Card DQ = null;
       Card D10 = null;
-      Card D9 = null;
 
       // // start situation: 
       // story pattern pre-condition
@@ -805,14 +805,17 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
          // create object HQ
          HQ = new Card ( );
 
-         // create object Open
-         Open = new Deck ( );
-
-         // create object Closed
-         Closed = new Deck ( );
+         // create object Open_deck
+         Open_deck = new Deck ( );
 
          // create object HA
          HA = new Card ( );
+
+         // create object Deck
+         Deck = new Deck ( );
+
+         // create object D9
+         D9 = new Card ( );
 
          // create object C8
          C8 = new Card ( );
@@ -828,9 +831,6 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
 
          // create object D10
          D10 = new Card ( );
-
-         // create object D9
-         D9 = new Card ( );
 
          // create link has from CA to Ulno
          CA.setPlayer (Ulno);
@@ -886,11 +886,17 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
          // create link object_CurrentTurn from this to CurrentTurn
          this.setCurrentTurn (CurrentTurn);
 
-         // create link object_Open from this to Open
-         this.setOpen (Open);
+         // create link on top from HA to Open_deck
+         HA.setDeck (Open_deck);
 
-         // create link object_Closed from this to Closed
-         this.setClosed (Closed);
+         // create link object_Open_deck from this to Open_deck
+         this.setOpen_deck (Open_deck);
+
+         // create link on top from D9 to Deck
+         D9.setDeck (Deck);
+
+         // create link object_Deck from this to Deck
+         this.setDeck (Deck);
 
          // create link object_HA from this to HA
          this.setHA (HA);
@@ -949,20 +955,20 @@ public class UulnoPlays7ForcingArtjomDraw2CardsTest extends TestCase
       this.setArtjom (null);
       this.setC8 (null);
       this.setCA (null);
-      this.setClosed (null);
       this.setCurrentTurn (null);
       this.setD10 (null);
       this.setD9 (null);
       this.setDJ (null);
       this.setDK (null);
       this.setDQ (null);
+      this.setDeck (null);
       this.setEero (null);
       this.setH10 (null);
       this.setH7 (null);
       this.setHA (null);
       this.setHK (null);
       this.setHQ (null);
-      this.setOpen (null);
+      this.setOpen_deck (null);
       this.setUlno (null);
    }
 }

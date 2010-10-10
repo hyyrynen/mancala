@@ -809,6 +809,9 @@ public class UlnoPlaysAnJAndChoosesASuitTest extends TestCase
          // check isomorphic binding between objects SJ and DA
          JavaSDM.ensure ( !SJ.equals (DA), "check isomorphic binding between objects SJ and DA" );
 
+         // check isomorphic binding between objects Open_deck and Deck
+         JavaSDM.ensure ( !Open_deck.equals (Deck), "check isomorphic binding between objects Open_deck and Deck" );
+
          // check isomorphic binding between objects Ulno and Eero
          JavaSDM.ensure ( !Ulno.equals (Eero), "check isomorphic binding between objects Ulno and Eero" );
 
@@ -884,6 +887,12 @@ public class UlnoPlaysAnJAndChoosesASuitTest extends TestCase
          // check link on top of from SJ to S8
          JavaSDM.ensure (S8.equals (SJ.getCard ()), "check link on top of from SJ to S8");
 
+         // check link on top from S10 to Deck
+         JavaSDM.ensure (Deck.equals (S10.getDeck ()), "check link on top from S10 to Deck");
+
+         // check link on top from S9 to Open_deck
+         JavaSDM.ensure (Open_deck.equals (S9.getDeck ()), "check link on top from S9 to Open_deck");
+
          // check link right of from Eero to Artjom
          JavaSDM.ensure (Artjom.equals (Eero.getPlayer ()), "check link right of from Eero to Artjom");
 
@@ -923,11 +932,11 @@ public class UlnoPlaysAnJAndChoosesASuitTest extends TestCase
       Card C10 = null;
       Card CJ = null;
       Deck Deck = null;
-      Deck Open_deck = null;
       Card S10 = null;
+      Deck Open_deck = null;
+      Card S9 = null;
       Card SJ = null;
       Card S8 = null;
-      Card S9 = null;
 
       // // start situation: 
       // story pattern Action
@@ -968,20 +977,20 @@ public class UlnoPlaysAnJAndChoosesASuitTest extends TestCase
          // create object Deck
          Deck = new Deck ( );
 
+         // create object S10
+         S10 = new Card ( );
+
          // create object Open_deck
          Open_deck = new Deck ( );
 
-         // create object S10
-         S10 = new Card ( );
+         // create object S9
+         S9 = new Card ( );
 
          // create object SJ
          SJ = new Card ( );
 
          // create object S8
          S8 = new Card ( );
-
-         // create object S9
-         S9 = new Card ( );
 
          // create link right of from Ulno to Eero
          Ulno.setPlayer (Eero);
@@ -1037,8 +1046,14 @@ public class UlnoPlaysAnJAndChoosesASuitTest extends TestCase
          // create link object_S7 from this to S7
          this.setS7 (S7);
 
+         // create link on top from S10 to Deck
+         S10.setDeck (Deck);
+
          // create link object_Deck from this to Deck
          this.setDeck (Deck);
+
+         // create link on top from S9 to Open_deck
+         S9.setDeck (Open_deck);
 
          // create link object_Open_deck from this to Open_deck
          this.setOpen_deck (Open_deck);

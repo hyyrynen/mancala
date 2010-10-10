@@ -807,6 +807,9 @@ public class EeroDealsOneRoundTest extends TestCase
          // create link object_Ulno from this to Ulno
          this.setUlno (Ulno);
 
+         // create link on top from C8 to Deck
+         C8.setDeck (Deck);
+
          // create link object_Deck from this to Deck
          this.setDeck (Deck);
 
