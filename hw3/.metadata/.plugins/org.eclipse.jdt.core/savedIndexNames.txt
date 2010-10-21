@@ -1,0 +1,18 @@
+INDEX VERSION 1.126+D:\Kristjan\Java_workspace\mancala\mancala2\hw3\.metadata\.plugins\org.eclipse.jdt.core
+1789169078.index
+4251467834.index
+3270002986.index
+2594609853.index
+28851545.index
+1674092712.index
+2864220331.index
+3000053649.index
+32225384.index
+2877109961.index
+2995743601.index
+1595652409.index
+3277441100.index
+3585733931.index
+855316089.index
+1195944079.index
+3730526690.index

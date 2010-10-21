@@ -1,0 +1,47 @@
+h;CoObRA2 Change stream - Version ;0;3
+h;Encoding;windows-1257
+h;ApplicationModel;Fujaba
+h;Application Name;Fujaba Tool Suite
+h;Fujaba Version;5.3.2
+h;PROJECT_FILE;D:\/Kristjan\/Java_workspace\/mancala\/mancala2\/hw3\/MauMau\/MauMau\/maumau.ctr
+h;reuseFAM;true
+t;gYpzS#0B01;drag;1286138370578;-;;
+c3;;i:Yfinw#247;information;v::563;v::556;v:java.lang.String:location_X;i:gYpzS#0B01;
+c3;;i:Yfinw#247;information;v::74;v::128;v:java.lang.String:location_Y;i:gYpzS#0B01;
+t;gYpzS#1B01;deleteClass;1286138375421;-;;
+c3;;i:Yfinw#047;contains;-;i:Yfinw#F37;v:java.lang.Integer:0;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;file;-;i:Yfinw#047;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;roles;-;i:Yfinw#C47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#C47;target;-;i:Yfinw#F37;-;i:gYpzS#1B01;
+c3;;i:Yfinw#D47;rightRole;-;i:Yfinw#C47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#C47;revRightRole;-;i:Yfinw#D47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#B47;revLeftRole;-;i:Yfinw#D47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#D47;leftRole;-;i:Yfinw#B47;-;i:gYpzS#1B01;
+c3;;i:0hrqB#07;roles;-;i:Yfinw#B47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#B47;target;-;i:0hrqB#07;-;i:gYpzS#1B01;
+c3;;i:Yfinw#B47;card;-;i:0hrqB#59;-;i:gYpzS#1B01;
+c2;;i:Yfinw#B47;-;-;-;-;i:gYpzS#1B01;
+c3;;i:Yfinw#D47;diagrams;-;i:0hrqB#56;v:java.lang.Integer:0;i:gYpzS#1B01;
+c3;;i:0hrqB#56;elements;-;i:Yfinw#D47;-;i:gYpzS#1B01;
+c2;;i:Yfinw#D47;-;-;-;-;i:gYpzS#1B01;
+c3;;i:Yfinw#C47;card;-;i:0hrqB#59;-;i:gYpzS#1B01;
+c2;;i:Yfinw#C47;-;-;-;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;roles;-;i:Yfinw#C47;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;declaredInPackage;-;i:RetLT#92;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;unparseInformations;-;i:Yfinw#147;i:0hrqB#56;i:gYpzS#1B01;
+c3;;i:Yfinw#147;aSGInformation;-;i:Yfinw#247;v:java.lang.String:entry;i:gYpzS#1B01;
+c3;;i:Yfinw#247;information;-;v::563;v:java.lang.String:location_X;i:gYpzS#1B01;
+c3;;i:Yfinw#247;information;-;v::74;v:java.lang.String:location_Y;i:gYpzS#1B01;
+c3;;i:Yfinw#247;information;-;v::84;v:java.lang.String:dimension_Width;i:gYpzS#1B01;
+c3;;i:Yfinw#247;information;-;v::43;v:java.lang.String:dimension_Height;i:gYpzS#1B01;
+c3;;i:Yfinw#147;aSGInformation;-;i:Yfinw#347;v:java.lang.String:attributePanel;i:gYpzS#1B01;
+c3;;i:Yfinw#347;information;-;v::true;v:java.lang.String:collapsed;i:gYpzS#1B01;
+c3;;i:Yfinw#147;aSGInformation;-;i:Yfinw#447;v:java.lang.String:methodPanel;i:gYpzS#1B01;
+c3;;i:Yfinw#447;information;-;v::true;v:java.lang.String:collapsed;i:gYpzS#1B01;
+c3;;i:Yfinw#147;aSGInformation;-;i:Yfinw#547;v:java.lang.String:signalPanel;i:gYpzS#1B01;
+c3;;i:Yfinw#547;information;-;v::true;v:java.lang.String:collapsed;i:gYpzS#1B01;
+c2;;i:Yfinw#147;-;-;-;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;name;v::deleted {Dealer};v::Dealer;-;i:gYpzS#1B01;
+c3;;i:Yfinw#F37;diagrams;-;i:0hrqB#56;v:java.lang.Integer:0;i:gYpzS#1B01;
+c3;;i:0hrqB#56;elements;-;i:Yfinw#F37;-;i:gYpzS#1B01;
+c2;;i:Yfinw#F37;-;-;-;-;i:gYpzS#1B01;

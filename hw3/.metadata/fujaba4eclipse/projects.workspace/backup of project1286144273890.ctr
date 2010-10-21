@@ -1,0 +1,20 @@
+h;CoObRA2 Change stream - Version ;0;3
+h;Encoding;windows-1257
+h;ApplicationModel;Fujaba
+h;Application Name;Fujaba Tool Suite
+h;Fujaba Version;5.3.2
+h;PROJECT_FILE;D:\/Kristjan\/Java_workspace\/mancala\/mancala2\/hw3\/Hw3\/maumau.ctr
+h;reuseFAM;true
+t;mlPwK#7CF1;inplace editing;1286144305328;-;;
+c3;;i:_1C8J#9F4;objectName;v::C8;v::C9;-;i:mlPwK#7CF1;
+c3;;i:_1C8J#9F4;typeCastSource;v::;-;-;i:mlPwK#7CF1;
+c3;;i:_1C8J#9F4;currentIcon;v::;-;-;i:mlPwK#7CF1;
+t;mlPwK#8CF1;inplace editing;1286144325031;-;;
+c3;;i:_1C8J#5E4;objectName;v::CA;v::CK;-;i:mlPwK#8CF1;
+c3;;i:_1C8J#5E4;typeCastSource;v::;-;-;i:mlPwK#8CF1;
+c3;;i:_1C8J#5E4;currentIcon;v::;-;-;i:mlPwK#8CF1;
+t;mlPwK#9CF1;drag;1286144472500;-;;
+c3;;i:_1C8J#984;information;v::259;v::260;v:java.lang.String:location_X;i:mlPwK#9CF1;
+c3;;i:_1C8J#984;information;v::195;v::196;v:java.lang.String:location_Y;i:mlPwK#9CF1;
+t;mlPwK#ACF1;inplace editing;1286144476593;-;;
+c3;;i:_1C8J#784;objectName;v::C8;v::C9;-;i:mlPwK#ACF1;

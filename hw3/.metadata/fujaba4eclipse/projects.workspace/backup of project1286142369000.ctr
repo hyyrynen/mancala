@@ -1,0 +1,16 @@
+h;CoObRA2 Change stream - Version ;0;3
+h;Encoding;windows-1257
+h;ApplicationModel;Fujaba
+h;Application Name;Fujaba Tool Suite
+h;Fujaba Version;5.3.2
+h;PROJECT_FILE;D:\/Kristjan\/Java_workspace\/mancala\/mancala2\/hw3\/Hw3\/maumau.ctr
+h;reuseFAM;true
+t;mlPwK#D7B1;inplace editing;1286142382234;-;;
+c3;;i:mlPwK#A5B1;instances;i:Yfinw#2E6;-;-;i:mlPwK#D7B1;
+c3;;i:Yfinw#2E6;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#D7B1;
+t;mlPwK#E7B1;inplace editing;1286142394156;-;;
+c3;;i:mlPwK#A5B1;instances;i:Yfinw#CD6;-;-;i:mlPwK#E7B1;
+c3;;i:Yfinw#CD6;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#E7B1;
+t;mlPwK#F7B1;inplace editing;1286142399109;-;;
+c3;;i:mlPwK#A5B1;instances;i:Yfinw#FA7;-;-;i:mlPwK#F7B1;
+c3;;i:Yfinw#FA7;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#F7B1;

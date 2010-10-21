@@ -1,0 +1,44 @@
+h;CoObRA2 Change stream - Version ;0;3
+h;Encoding;windows-1257
+h;ApplicationModel;Fujaba
+h;Application Name;Fujaba Tool Suite
+h;Fujaba Version;5.3.2
+h;PROJECT_FILE;D:\/Kristjan\/Java_workspace\/mancala\/mancala2\/hw3\/Hw3\/maumau.ctr
+h;reuseFAM;true
+t;mlPwK#17B1;inplace editing;1286142270046;-;;
+c3;;i:mlPwK#A5B1;instances;i:Yfiny#CD6;-;-;i:mlPwK#17B1;
+c3;;i:Yfiny#CD6;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#17B1;
+t;mlPwK#27B1;inplace editing;1286142277890;-;;
+c3;;i:mlPwK#A5B1;instances;i:Yfiny#2E6;-;-;i:mlPwK#27B1;
+c3;;i:Yfiny#2E6;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#27B1;
+t;mlPwK#37B1;inplace editing;1286142308609;-;;
+c3;;i:mlPwK#A5B1;instances;i:m0IvH#76C;-;-;i:mlPwK#37B1;
+c3;;i:m0IvH#76C;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#37B1;
+t;mlPwK#47B1;drag;1286142321515;-;;
+c3;;i:Dg0Lx#DCD;information;v::765;v::766;v:java.lang.String:location_Y;i:mlPwK#47B1;
+t;mlPwK#57B1;inplace editing;1286142330109;-;;
+c3;;i:mlPwK#A5B1;instances;i:Dg0Lx#BCD;-;-;i:mlPwK#57B1;
+c3;;i:Dg0Lx#BCD;instanceOf;i:mlPwK#A5B1;-;-;i:mlPwK#57B1;
+c3;;i:Dg0Lx#BCD;typeCastSource;v::;-;-;i:mlPwK#57B1;
+c3;;i:Dg0Lx#BCD;currentIcon;v::;-;-;i:mlPwK#57B1;
+t;mlPwK#67B1;inplace editing;1286142339062;-;;
+c3;;i:Dg0Lx#BCD;bound;v::false;v::true;-;i:mlPwK#67B1;
+t;mlPwK#77B1;inplace editing;1286142348484;-;;
+c3;;i:Dg0Lx#7CD;typeCastSource;v::;-;-;i:mlPwK#77B1;
+c3;;i:Dg0Lx#7CD;bound;v::false;v::true;-;i:mlPwK#77B1;
+c3;;i:Dg0Lx#7CD;currentIcon;v::;-;-;i:mlPwK#77B1;
+t;mlPwK#87B1;inplace editing;1286142351390;-;;
+c3;;i:Dg0Lx#3CD;typeCastSource;v::;-;-;i:mlPwK#87B1;
+c3;;i:Dg0Lx#3CD;bound;v::false;v::true;-;i:mlPwK#87B1;
+c3;;i:Dg0Lx#3CD;currentIcon;v::;-;-;i:mlPwK#87B1;
+t;mlPwK#97B1;inplace editing;1286142355015;-;;
+c3;;i:Dg0Lx#FBD;typeCastSource;v::;-;-;i:mlPwK#97B1;
+c3;;i:Dg0Lx#FBD;bound;v::false;v::true;-;i:mlPwK#97B1;
+c3;;i:Dg0Lx#FBD;currentIcon;v::;-;-;i:mlPwK#97B1;
+t;mlPwK#A7B1;drag;1286142356734;-;;
+c3;;i:Dg0Lx#9CD;information;v::484;v::556;v:java.lang.String:location_X;i:mlPwK#A7B1;
+t;mlPwK#B7B1;drag;1286142360906;-;;
+c3;;i:Dg0Lx#1CD;information;v::647;v::688;v:java.lang.String:location_X;i:mlPwK#B7B1;
+c3;;i:Dg0Lx#1CD;information;v::23;v::25;v:java.lang.String:location_Y;i:mlPwK#B7B1;
+t;mlPwK#C7B1;drag;1286142362234;-;;
+c3;;i:mlPwK#F951;information;v::635;v::672;v:java.lang.String:location_X;i:mlPwK#C7B1;

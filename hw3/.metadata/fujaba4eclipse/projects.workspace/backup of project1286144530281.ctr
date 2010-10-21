@@ -1,0 +1,21 @@
+h;CoObRA2 Change stream - Version ;0;3
+h;Encoding;windows-1257
+h;ApplicationModel;Fujaba
+h;Application Name;Fujaba Tool Suite
+h;Fujaba Version;5.3.2
+h;PROJECT_FILE;D:\/Kristjan\/Java_workspace\/mancala\/mancala2\/hw3\/Hw3\/maumau.ctr
+h;reuseFAM;true
+t;mlPwK#EA12;drag;1286144594078;-;;
+c3;;i:mlPwK#97F1;information;v::351;v::296;v:java.lang.String:location_X;i:mlPwK#EA12;
+c3;;i:mlPwK#97F1;information;v::166;v::168;v:java.lang.String:location_Y;i:mlPwK#EA12;
+t;mlPwK#FA12;editLink;1286144632062;-;;
+c1;;v::de.uni_paderborn.fujaba.uml.behavior.UMLLink;i:mlPwK#0B12;-;i:mlPwK#FA12;
+c3;;i:0hrqB#9A;instances;i:mlPwK#0B12;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#0B12;instanceOf;i:0hrqB#9A;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#0B12;range;v::;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#77F1;revSource;i:mlPwK#0B12;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#0B12;source;i:mlPwK#77F1;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#27F1;revTarget;i:mlPwK#0B12;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#0B12;target;i:mlPwK#27F1;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#66F1;elements;i:mlPwK#0B12;-;-;i:mlPwK#FA12;
+c3;;i:mlPwK#0B12;diagrams;i:mlPwK#66F1;-;v:java.lang.Integer:0;i:mlPwK#FA12;

@@ -1,0 +1,51 @@
+
+public class House {
+	private Alarm alarm = null;
+	
+	private House(){
+		alarm = new Alarm();
+	}
+	
+	private static House house = new House();
+	
+	public static House getInstance() { 
+		return house; 
+	}
+	
+	
+	public void operation(){
+		alarm.setAactivateAcoustic(true);
+		alarm.setAactivateEmail(true);
+	}
+	
+	public Alarm getAlarm() {
+		return alarm;
+	}
+}
+
+class Alarm{
+	private boolean AcusticActivated = false;
+	private boolean FlashLightActivated = false;
+	private boolean EmailActivated = false;
+	private boolean raised = false;
+	
+	public void raiseAlarm() {
+		raised = true;
+	}
+	
+	public void shutuptheAlarm() {
+		raised = false;
+	}
+	
+	public void setAactivateAcoustic(boolean status) {
+		this.AcusticActivated = status;
+	}
+	
+	public void setAactivateFlashlight(boolean status) {
+		this.FlashLightActivated = status;
+	}
+	
+	public void setAactivateEmail(boolean status) {
+		this.EmailActivated = status;
+	}
+}

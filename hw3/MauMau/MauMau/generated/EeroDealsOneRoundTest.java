@@ -425,7 +425,7 @@ public class EeroDealsOneRoundTest extends TestCase
    /**
     * <pre>
     *           0..1     object_Eero     0..1
-    * EeroDealsOneRoundTest ------------------------> Dealer
+    * EeroDealsOneRoundTest ------------------------> $type
     *           test               Eero
     * </pre>
     */
@@ -433,17 +433,17 @@ public class EeroDealsOneRoundTest extends TestCase
 
    @Property( name = PROPERTY_EERO, kind = ReferenceHandler.ReferenceKind.TO_ONE,
          adornment = ReferenceHandler.Adornment.NONE)
-   private Dealer Eero;
+   private $container Eero;
 
    @Property( name = PROPERTY_EERO )
-   public boolean setEero (Dealer value)
+   public boolean setEero ($type value)
    {
       boolean changed = false;
 
       if (this.Eero != value)
       {
       
-         Dealer oldValue = this.Eero;
+         $type oldValue = this.Eero;
          this.Eero = value;
          changed = true;
       
@@ -452,13 +452,13 @@ public class EeroDealsOneRoundTest extends TestCase
    }
 
    @Property( name = PROPERTY_EERO )
-   public EeroDealsOneRoundTest withEero (Dealer value)
+   public EeroDealsOneRoundTest withEero ($type value)
    {
       setEero (value);
       return this;
    }
 
-   public Dealer getEero ()
+   public $type getEero ()
    {
       return this.Eero;
    }
@@ -712,8 +712,8 @@ public class EeroDealsOneRoundTest extends TestCase
    public void setUp ()
    {
       boolean fujaba__Success = false;
-      Dealer Eero = null;
       Deck Deck = null;
+      Player Eero = null;
       Player Ulno = null;
       Player Artjom = null;
       Card D9 = null;
@@ -735,7 +735,7 @@ public class EeroDealsOneRoundTest extends TestCase
          fujaba__Success = false; 
 
          // create object Eero
-         Eero = new Dealer ( );
+         Eero = new $type ( );
 
          // create object Deck
          Deck = new Deck ( );
@@ -787,9 +787,6 @@ public class EeroDealsOneRoundTest extends TestCase
 
          // create link holds from Deck to Eero
          Deck.setDealer (Eero);
-
-         // create link is from Eero to Eero
-         Eero.setDealer (Eero);
 
          // create link object_Eero from this to Eero
          this.setEero (Eero);
