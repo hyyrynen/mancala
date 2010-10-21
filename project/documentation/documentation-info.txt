@@ -1,0 +1,1 @@
+//Constant attention requiredDeadline: some doucmentation after each major implementation1. Make someone responsible for documenting the progress2. Create documentation about it...	

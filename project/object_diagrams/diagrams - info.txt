@@ -1,0 +1,7 @@
+//Second priority
+Deadline: 11st of November
+
+1. Create object diagrams for the user stories
+	1.1 Every team member will have to create 10 object diagrams
+
+	

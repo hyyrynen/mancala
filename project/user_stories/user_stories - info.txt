@@ -1,0 +1,11 @@
+//First priority
+Deadline: 11st of November
+
+
+Deadline: 1st of November
+1. Create unique titles for user stories
+	1.1 Every team member will have to create about 8 user story titles
+
+Deadline: 11st of November
+2. Create user stories that follow the titles
+	
