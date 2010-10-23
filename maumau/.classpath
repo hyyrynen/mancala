@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="generated"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="D:/Programmid/eclipse-java-helios-win32/eclipse/plugins/de.uni_kassel.features_0.24.0.201005281321.jar"/>
+	<classpathentry kind="lib" path="D:/Programmid/eclipse-java-helios-win32/eclipse/plugins/de.uni_paderborn.runtimetools_1.0.4.201005281321.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
