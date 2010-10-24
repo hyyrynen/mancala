@@ -4,6 +4,7 @@
 import de.uni_kassel.features.annotation.util.Property; // requires Fujaba5/libs/features.jar in classpath
 import de.uni_kassel.features.ReferenceHandler; // requires Fujaba5/libs/features.jar in classpath
 import java.io.File;
+import de.upb.tools.sdm.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
 
 
 public class AbstractFile
@@ -69,6 +70,39 @@ public class AbstractFile
       return this.directory;
    }
 
+   public String getAbsolutePath ()
+   {
+      boolean fujaba__Success = false;
+      File f = null;
+
+      // story pattern storypatternwiththis
+      try 
+      {
+         fujaba__Success = false; 
+
+         // search to-one link file from this to f
+         f = this.getIoFile ();
+
+         // check object f is really bound
+         JavaSDM.ensure ( f != null );
+
+
+         fujaba__Success = true;
+      }
+      catch ( JavaSDMException fujaba__InternalException )
+      {
+         fujaba__Success = false;
+      }
+
+      return f.getAbsolutePath();
+   }
+
+   public String getTheItemName ()
+   {
+
+      return this.name;
+   }
+
    /**
     * <pre>
     *           0..1     file     0..1
@@ -116,27 +150,80 @@ public class AbstractFile
    private String name;
 
    @Property( name = PROPERTY_NAME )
-   public void setName (String value)
+   protected void setName (String value)
    {
       this.name = value;
    }
 
-   public AbstractFile withName (String value)
+   protected AbstractFile withName (String value)
    {
       setName (value);
       return this;
    }
 
    @Property( name = PROPERTY_NAME )
-   public String getName ()
+   protected String getName ()
    {
       return this.name;
+   }
+
+   /**
+    * <pre>
+    *           0..n     consistsOf     0..1
+    * AbstractFile ------------------------- Root
+    *           abstractFile               root
+    * </pre>
+    */
+   public static final String PROPERTY_ROOT = "root";
+
+   @Property( name = PROPERTY_ROOT, partner = Root.PROPERTY_ABSTRACT_FILE, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+         adornment = ReferenceHandler.Adornment.PARENT)
+   private Root root;
+
+   @Property( name = PROPERTY_ROOT )
+   public boolean setRoot (Root value)
+   {
+      boolean changed = false;
+
+      if (this.root != value)
+      {
+      
+         Root oldValue = this.root;
+         AbstractFile source = this;
+         if (this.root != null)
+         {
+            this.root = null;
+            oldValue.removeFromAbstractFile (this);
+         }
+         this.root = value;
+
+         if (value != null)
+         {
+            value.addToAbstractFile (this);
+         }
+         changed = true;
+      
+      }
+      return changed;
+   }
+
+   @Property( name = PROPERTY_ROOT )
+   public AbstractFile withRoot (Root value)
+   {
+      setRoot (value);
+      return this;
+   }
+
+   public Root getRoot ()
+   {
+      return this.root;
    }
 
    public void removeYou()
    {
       this.setDirectory (null);
       this.setIoFile (null);
+      this.setRoot (null);
    }
 }
 

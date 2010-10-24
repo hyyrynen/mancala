@@ -4,9 +4,9 @@
 import java.io.File;
 import de.upb.tools.sdm.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
 import java.util.ArrayList;
+import java.util.*;
 import de.uni_kassel.features.annotation.util.Property; // requires Fujaba5/libs/features.jar in classpath
 import de.uni_kassel.features.ReferenceHandler; // requires Fujaba5/libs/features.jar in classpath
-import java.util.*;
 import de.upb.tools.fca.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
 
 
@@ -22,8 +22,10 @@ public class Directory extends AbstractFile
       ArrayList fileArray = null;
       Directory newDir = null;
       RegularFile newFile = null;
+      Iterator fujaba__IterFileArrayToF2 = null;
       File f2 = null;
 
+      
       // story pattern createFile
       try 
       {
@@ -92,26 +94,66 @@ public class Directory extends AbstractFile
 
          // check object fileArray is really bound
          JavaSDM.ensure ( fileArray != null );
-         // search to-one link iterator from fileArray to f2
-         f2 = fileArray.getFile ();
+         // iterate to-many link iterator from fileArray to f2
+         fujaba__Success = false;
+         fujaba__IterFileArrayToF2 = fileArray.iterator ();
 
-         // check object f2 is really bound
-         JavaSDM.ensure ( f2 != null );
-
-         if ( f.isDirectory() )
+         while ( fujaba__IterFileArrayToF2.hasNext () )
          {
-            // story pattern createDirectory
-            try 
+            try
             {
-               fujaba__Success = false; 
+               f2 = (File) fujaba__IterFileArrayToF2.next ();
 
                // check object f2 is really bound
                JavaSDM.ensure ( f2 != null );
-               // create object newDir
-               newDir = new Directory(f2.getAbsolutePath());
+               if ( f.isDirectory() )
+               {
+                  // story pattern createDirectory
+                  try 
+                  {
+                     fujaba__Success = false; 
 
-               // create link has from newDir to this
-               newDir.setDirectory (this);
+                     // check object f2 is really bound
+                     JavaSDM.ensure ( f2 != null );
+                     // create object newDir
+                     newDir = new Directory(f2.getAbsolutePath());
+
+                     // create link has from newDir to this
+                     newDir.setDirectory (this);
+
+                     fujaba__Success = true;
+                  }
+                  catch ( JavaSDMException fujaba__InternalException )
+                  {
+                     fujaba__Success = false;
+                  }
+
+
+               }
+               else
+               {
+                  // story pattern Create a regularfile for each one
+                  try 
+                  {
+                     fujaba__Success = false; 
+
+                     // check object f2 is really bound
+                     JavaSDM.ensure ( f2 != null );
+                     // create object newFile
+                     newFile = new RegularFile(f2.getAbsolutePath());
+
+                     // create link has from newFile to this
+                     newFile.setDirectory (this);
+
+                     fujaba__Success = true;
+                  }
+                  catch ( JavaSDMException fujaba__InternalException )
+                  {
+                     fujaba__Success = false;
+                  }
+
+
+               }
 
                fujaba__Success = true;
             }
@@ -119,34 +161,8 @@ public class Directory extends AbstractFile
             {
                fujaba__Success = false;
             }
-
-
          }
-         else
-         {
-            // story pattern Create a regularfile for each one
-            try 
-            {
-               fujaba__Success = false; 
-
-               // check object f2 is really bound
-               JavaSDM.ensure ( f2 != null );
-               // create object newFile
-               newFile = new RegularFile(f2.getAbsolutePath());
-
-               // create link has from newFile to this
-               newFile.setDirectory (this);
-
-               fujaba__Success = true;
-            }
-            catch ( JavaSDMException fujaba__InternalException )
-            {
-               fujaba__Success = false;
-            }
-
-
-         }
-
+         JavaSDM.ensure (fujaba__Success);
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )

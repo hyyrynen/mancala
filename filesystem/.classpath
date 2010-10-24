@@ -4,5 +4,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/de.uni_kassel.features_0.24.0.201005281321.jar"/>
 	<classpathentry kind="lib" path="libs/de.uni_paderborn.runtimetools_1.0.4.201005281321.jar"/>
+	<classpathentry kind="lib" path="libs/junit-4.8.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
