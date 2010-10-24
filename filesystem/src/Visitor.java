@@ -22,8 +22,6 @@ public class Visitor
          JavaSDM.ensure ( file != null );
          // collabStat call
          file.f.accept(this);
-         // collabStat call
-         this.return this.fileCount;;
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
@@ -31,11 +29,14 @@ public class Visitor
          fujaba__Success = false;
       }
 
-      return ;
+      return this.fileCount;
    }
 
    public String[] findAll (String extension )
    {
+      boolean fujaba__Success = false;
+
+      return null;
    }
 
    public String[] findAll (String searchPattern , AbstractFile file )
@@ -50,11 +51,9 @@ public class Visitor
          // check object file is really bound
          JavaSDM.ensure ( file != null );
          // collabStat call
-         this.this.searchPattern = searchPattern;
+         searchPattern = searchPattern;
          // collabStat call
          file.file.accept(this);
-         // collabStat call
-         this.return this.foundPaths;
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
@@ -62,7 +61,7 @@ public class Visitor
          fujaba__Success = false;
       }
 
-      return ;
+      return this.foundPaths;
    }
 
    public void visit (Directory directory )

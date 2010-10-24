@@ -269,9 +269,11 @@ public class Directory extends AbstractFile
               : this.abstractFile.size ());
    }
 
-   public Visitor accept (Visitor visitor )
+   public void accept (Visitor visitor )
    {
       boolean fujaba__Success = false;
+      Iterator fujaba__IterThisToChild = null;
+      AbstractFile child = null;
 
       // story pattern storypatternwiththis
       try 
@@ -281,12 +283,45 @@ public class Directory extends AbstractFile
          // check object visitor is really bound
          JavaSDM.ensure ( visitor != null );
          // collabStat call
-         visitor.visitor.visit(this);
-         // collabStat call
-         for ( int i = 0;i <= this.childNodes.length;++i )
+         visitor.visit(this);
+         fujaba__Success = true;
+      }
+      catch ( JavaSDMException fujaba__InternalException )
+      {
+         fujaba__Success = false;
+      }
+
+      // story pattern storypatternwiththis
+      try 
+      {
+         fujaba__Success = false; 
+
+         // iterate to-many link has from this to child
+         fujaba__Success = false;
+         fujaba__IterThisToChild = this.iteratorOfAbstractFile ();
+
+         while ( fujaba__IterThisToChild.hasNext () )
          {
-         this.childNodes[i].accept(visitor);
+            try
+            {
+               child = (AbstractFile) fujaba__IterThisToChild.next ();
+
+               // check object child is really bound
+               JavaSDM.ensure ( child != null );
+               // check isomorphic binding between objects this and child
+               JavaSDM.ensure ( !this.equals (child) );
+
+               // collabStat call
+               child.accept(visitor);
+
+               fujaba__Success = true;
+            }
+            catch ( JavaSDMException fujaba__InternalException )
+            {
+               fujaba__Success = false;
+            }
          }
+         JavaSDM.ensure (fujaba__Success);
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
@@ -297,65 +332,12 @@ public class Directory extends AbstractFile
       return ;
    }
 
-   /**
-    * <pre>
-    *           0..n     root     0..1
-    * Directory ------------------------- Root
-    *           abstractFile               root
-    * </pre>
-    */
-   public static final String PROPERTY_ROOT = "root";
-
-   @Property( name = PROPERTY_ROOT, partner = Root.PROPERTY_ABSTRACT_FILE, kind = ReferenceHandler.ReferenceKind.TO_ONE,
-         adornment = ReferenceHandler.Adornment.PARENT)
-   private Root root;
-
-   @Property( name = PROPERTY_ROOT )
-   public boolean setRoot (Root value)
-   {
-      boolean changed = false;
-
-      if (this.root != value)
-      {
-      
-         Root oldValue = this.root;
-         Directory source = this;
-         if (this.root != null)
-         {
-            this.root = null;
-            oldValue.removeFromAbstractFile (this);
-         }
-         this.root = value;
-
-         if (value != null)
-         {
-            value.addToAbstractFile (this);
-         }
-         changed = true;
-      
-      }
-      return changed;
-   }
-
-   @Property( name = PROPERTY_ROOT )
-   public Directory withRoot (Root value)
-   {
-      setRoot (value);
-      return this;
-   }
-
-   public Root getRoot ()
-   {
-      return this.root;
-   }
-
    public void removeYou()
    {
       for (Iterator iterAbstractFile = this.iteratorOfAbstractFile (); iterAbstractFile.hasNext ();)
       {
          ((AbstractFile)iterAbstractFile.next ()).removeYou ();
       }
-      this.setRoot (null);
       super.removeYou ();
    }
 }

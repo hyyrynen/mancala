@@ -116,19 +116,19 @@ public class AbstractFile
    private String name;
 
    @Property( name = PROPERTY_NAME )
-   protected void setName (String value)
+   public void setName (String value)
    {
       this.name = value;
    }
 
-   protected AbstractFile withName (String value)
+   public AbstractFile withName (String value)
    {
       setName (value);
       return this;
    }
 
    @Property( name = PROPERTY_NAME )
-   protected String getName ()
+   public String getName ()
    {
       return this.name;
    }

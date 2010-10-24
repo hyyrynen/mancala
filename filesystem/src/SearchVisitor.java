@@ -128,7 +128,7 @@ public class SearchVisitor extends Visitor
             // check object f is really bound
             JavaSDM.ensure ( f != null );
             // collabStat call
-            this.this.foundPaths.add(f.name);
+            this.foundPaths.add(f.getAbsolutePath());
             fujaba__Success = true;
          }
          catch ( JavaSDMException fujaba__InternalException )

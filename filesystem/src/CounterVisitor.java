@@ -51,7 +51,7 @@ public class CounterVisitor extends Visitor
          fujaba__Success = false; 
 
          // collabStat call
-         this.fileCount = this.this.fileCount + 1;
+         this.fileCount = this.fileCount + 1;
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
