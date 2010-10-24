@@ -18,19 +18,19 @@ public class Directory extends AbstractFile
    public  Directory (String name )
    {
       boolean fujaba__Success = false;
-      File j = null;
+      File f = null;
       ArrayList fileArray = null;
       Directory newDir = null;
       RegularFile newFile = null;
-      File f = null;
+      File f2 = null;
 
-      // story pattern successor
+      // story pattern createFile
       try 
       {
          fujaba__Success = false; 
 
-         // create object j
-         j = new java.io.File(name);
+         // create object f
+         f = new java.io.File(name);
 
          fujaba__Success = true;
       }
@@ -44,7 +44,7 @@ public class Directory extends AbstractFile
          return ;
 
       }
-      // story pattern storypatternwiththis
+      // story pattern linkFile
       try 
       {
          fujaba__Success = false; 
@@ -53,8 +53,8 @@ public class Directory extends AbstractFile
          JavaSDM.ensure ( f != null );
          // constraint f.isDirectory()
          JavaSDM.ensure ( f.isDirectory() );
-         // create link file from f to this
-         f.setFile (this);
+         // create link file from this to f
+         this.setIoFile (f);
 
          fujaba__Success = true;
       }
@@ -68,7 +68,7 @@ public class Directory extends AbstractFile
          return ;
 
       }
-      // story pattern storypatternwiththis
+      // story pattern createFileArray
       try 
       {
          fujaba__Success = false; 
@@ -85,30 +85,30 @@ public class Directory extends AbstractFile
          fujaba__Success = false;
       }
 
-      // story pattern successor
+      // story pattern iterateEachFile in FileArray
       try 
       {
          fujaba__Success = false; 
 
          // check object fileArray is really bound
          JavaSDM.ensure ( fileArray != null );
-         // search to-one link iterator from fileArray to f
-         f = fileArray.getFile ();
+         // search to-one link iterator from fileArray to f2
+         f2 = fileArray.getFile ();
 
-         // check object f is really bound
-         JavaSDM.ensure ( f != null );
+         // check object f2 is really bound
+         JavaSDM.ensure ( f2 != null );
 
          if ( f.isDirectory() )
          {
-            // story pattern storypatternwiththis
+            // story pattern createDirectory
             try 
             {
                fujaba__Success = false; 
 
-               // check object f is really bound
-               JavaSDM.ensure ( f != null );
+               // check object f2 is really bound
+               JavaSDM.ensure ( f2 != null );
                // create object newDir
-               newDir = new Directory(f.getAbsolutePath());
+               newDir = new Directory(f2.getAbsolutePath());
 
                // create link has from newDir to this
                newDir.setDirectory (this);
@@ -124,15 +124,15 @@ public class Directory extends AbstractFile
          }
          else
          {
-            // story pattern storypatternwiththis
+            // story pattern Create a regularfile for each one
             try 
             {
                fujaba__Success = false; 
 
-               // check object f is really bound
-               JavaSDM.ensure ( f != null );
+               // check object f2 is really bound
+               JavaSDM.ensure ( f2 != null );
                // create object newFile
-               newFile = new RegularFile(f.getAbsolutePath());
+               newFile = new RegularFile(f2.getAbsolutePath());
 
                // create link has from newFile to this
                newFile.setDirectory (this);
@@ -295,29 +295,6 @@ public class Directory extends AbstractFile
       }
 
       return ;
-   }
-
-   public static final String PROPERTY_CHILD_NODES = "childNodes";
-
-   @Property( name = PROPERTY_CHILD_NODES, kind = ReferenceHandler.ReferenceKind.ATTRIBUTE )
-   private ArrayList childNodes;
-
-   @Property( name = PROPERTY_CHILD_NODES )
-   private void setChildNodes (ArrayList value)
-   {
-      this.childNodes = value;
-   }
-
-   private Directory withChildNodes (ArrayList value)
-   {
-      setChildNodes (value);
-      return this;
-   }
-
-   @Property( name = PROPERTY_CHILD_NODES )
-   private ArrayList getChildNodes ()
-   {
-      return this.childNodes;
    }
 
    /**

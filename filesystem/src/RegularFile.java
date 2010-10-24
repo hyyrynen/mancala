@@ -3,8 +3,6 @@
  */
 import java.io.File;
 import de.upb.tools.sdm.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
-import de.uni_kassel.features.annotation.util.Property; // requires Fujaba5/libs/features.jar in classpath
-import de.uni_kassel.features.ReferenceHandler; // requires Fujaba5/libs/features.jar in classpath
 
 
 public class RegularFile extends AbstractFile
@@ -47,8 +45,8 @@ public class RegularFile extends AbstractFile
          JavaSDM.ensure ( f != null );
          // constraint f.isFile()
          JavaSDM.ensure ( f.isFile() );
-         // create link file from f to this
-         f.setFile (this);
+         // create link file from this to f
+         this.setIoFile (f);
 
          fujaba__Success = true;
       }
@@ -76,6 +74,8 @@ public class RegularFile extends AbstractFile
 
          // check object visitor is really bound
          JavaSDM.ensure ( visitor != null );
+         // collabStat call
+         visitor.visit(this);
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
@@ -89,16 +89,19 @@ public class RegularFile extends AbstractFile
    public long getFileSize ()
    {
       boolean fujaba__Success = false;
+      File f = null;
 
       // story pattern storypatternwiththis
       try 
       {
          fujaba__Success = false; 
 
+         // search to-one link file from this to f
+         f = this.getIoFile ();
+
          // check object f is really bound
          JavaSDM.ensure ( f != null );
-         // check link file from f to this
-         JavaSDM.ensure (this.equals (f.getFile ()));
+
 
          fujaba__Success = true;
       }
@@ -108,29 +111,6 @@ public class RegularFile extends AbstractFile
       }
 
       return f.length();
-   }
-
-   public static final String PROPERTY_NAME = "name";
-
-   @Property( name = PROPERTY_NAME, kind = ReferenceHandler.ReferenceKind.ATTRIBUTE )
-   private String name;
-
-   @Property( name = PROPERTY_NAME )
-   private void setName (String value)
-   {
-      this.name = value;
-   }
-
-   private RegularFile withName (String value)
-   {
-      setName (value);
-      return this;
-   }
-
-   @Property( name = PROPERTY_NAME )
-   private String getName ()
-   {
-      return this.name;
    }
 
 }

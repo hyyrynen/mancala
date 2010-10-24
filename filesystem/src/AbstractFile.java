@@ -73,41 +73,41 @@ public class AbstractFile
     * <pre>
     *           0..1     file     0..1
     * AbstractFile ------------------------> File
-    *           abstractFile               file
+    *           file               ioFile
     * </pre>
     */
-   public static final String PROPERTY_FILE = "file";
+   public static final String PROPERTY_IO_FILE = "ioFile";
 
-   @Property( name = PROPERTY_FILE, kind = ReferenceHandler.ReferenceKind.TO_ONE,
+   @Property( name = PROPERTY_IO_FILE, kind = ReferenceHandler.ReferenceKind.TO_ONE,
          adornment = ReferenceHandler.Adornment.NONE)
-   private File file;
+   private File ioFile;
 
-   @Property( name = PROPERTY_FILE )
-   public boolean setFile (File value)
+   @Property( name = PROPERTY_IO_FILE )
+   public boolean setIoFile (File value)
    {
       boolean changed = false;
 
-      if (this.file != value)
+      if (this.ioFile != value)
       {
       
-         File oldValue = this.file;
-         this.file = value;
+         File oldValue = this.ioFile;
+         this.ioFile = value;
          changed = true;
       
       }
       return changed;
    }
 
-   @Property( name = PROPERTY_FILE )
-   public AbstractFile withFile (File value)
+   @Property( name = PROPERTY_IO_FILE )
+   public AbstractFile withIoFile (File value)
    {
-      setFile (value);
+      setIoFile (value);
       return this;
    }
 
-   public File getFile ()
+   public File getIoFile ()
    {
-      return this.file;
+      return this.ioFile;
    }
 
    public static final String PROPERTY_NAME = "name";
@@ -116,19 +116,19 @@ public class AbstractFile
    private String name;
 
    @Property( name = PROPERTY_NAME )
-   private void setName (String value)
+   protected void setName (String value)
    {
       this.name = value;
    }
 
-   private AbstractFile withName (String value)
+   protected AbstractFile withName (String value)
    {
       setName (value);
       return this;
    }
 
    @Property( name = PROPERTY_NAME )
-   private String getName ()
+   protected String getName ()
    {
       return this.name;
    }
@@ -136,7 +136,7 @@ public class AbstractFile
    public void removeYou()
    {
       this.setDirectory (null);
-      this.setFile (null);
+      this.setIoFile (null);
    }
 }
 

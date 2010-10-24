@@ -6,7 +6,6 @@ import de.uni_kassel.features.ReferenceHandler; // requires Fujaba5/libs/feature
 import java.util.*;
 import de.upb.tools.fca.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
 import de.upb.tools.sdm.*; // requires Fujaba5/libs/RuntimeTools.jar in classpath
-import java.util.ArrayList;
 
 
 public class Root
@@ -154,29 +153,6 @@ public class Root
       }
 
       return ;
-   }
-
-   public static final String PROPERTY_CHILD_NODES = "childNodes";
-
-   @Property( name = PROPERTY_CHILD_NODES, kind = ReferenceHandler.ReferenceKind.ATTRIBUTE )
-   private ArrayList childNodes;
-
-   @Property( name = PROPERTY_CHILD_NODES )
-   private void setChildNodes (ArrayList value)
-   {
-      this.childNodes = value;
-   }
-
-   private Root withChildNodes (ArrayList value)
-   {
-      setChildNodes (value);
-      return this;
-   }
-
-   @Property( name = PROPERTY_CHILD_NODES )
-   private ArrayList getChildNodes ()
-   {
-      return this.childNodes;
    }
 
    public static Root getInstance ()
