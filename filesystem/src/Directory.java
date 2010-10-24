@@ -25,7 +25,6 @@ public class Directory extends AbstractFile
       Iterator fujaba__IterFileArrayToF2 = null;
       File f2 = null;
 
-      
       // story pattern createFile
       try 
       {
