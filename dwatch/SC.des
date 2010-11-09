@@ -1,0 +1,44 @@
+STATECHART:
+    top [DS]
+        NotHighLightingBackground
+        HighlightingBackground
+        CountingSeconds [DS]
+        StillHighlighting
+
+ENTER:
+   N: top.CountingSeconds
+   O: gui.increaseTimeByOne()
+gui.refreshTimeDisplay()
+
+ENTER:
+   N: top.NotHighLightingBackground
+   O: gui.unsetIndiglo()
+
+ENTER:
+   N: top.HighlightingBackground
+   O: gui.setIndiglo()
+
+TRANSITION:
+    S: top.CountingSeconds
+    N: top.CountingSeconds
+    T: 1
+
+TRANSITION:
+    S: top.NotHighLightingBackground
+    N: top.HighlightingBackground
+    E: topRightPressed
+
+TRANSITION:
+    S: top.HighlightingBackground
+    N: top.StillHighlighting
+    E: topRightReleased
+
+TRANSITION:
+    S: top.StillHighlighting
+    N: top.HighlightingBackground
+    E: topRightPressed
+
+TRANSITION:
+    S: top.StillHighlighting
+    N: top.NotHighLightingBackground
+    T: 2

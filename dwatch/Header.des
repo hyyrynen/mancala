@@ -1,0 +1,11 @@
+INITIALIZER:
+    from Tkinter import *
+    from DWatchGUI import DWatchGUI
+
+    root = Tk()
+    root.title("watch")
+    gui = DWatchGUI(root, eventhandler)
+
+    eventhandler.start()
+
+    root.mainloop()
