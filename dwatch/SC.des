@@ -1,44 +1,121 @@
 STATECHART:
     top [DS]
-        NotHighLightingBackground
-        HighlightingBackground
-        CountingSeconds [DS]
-        StillHighlighting
+        ConcurrentRegions [DS]
+            CountingRegion [CS] [DS]
+                CountingSeconds [DS]
+            HighlightRegion [CS] [DS]
+                HighlightingBackground
+                StillHighlighting
+                NotHighLightingBackground [DS]
+            RefreshRegion [CS] [DS]
+                RefreshingNormal [DS]
+                RefreshingChrono
+            ChronoRegion [CS] [DS]
+                NotUpdating [DS]
+                Updating
+                ClearingChrono
 
 ENTER:
-   N: top.CountingSeconds
-   O: gui.increaseTimeByOne()
-gui.refreshTimeDisplay()
+   N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
+   O: gui.resetChrono()
 
 ENTER:
-   N: top.NotHighLightingBackground
+   N: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
    O: gui.unsetIndiglo()
 
 ENTER:
-   N: top.HighlightingBackground
+   N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+   O: gui.refreshTimeDisplay()
+
+ENTER:
+   N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
    O: gui.setIndiglo()
 
+ENTER:
+   N: top.ConcurrentRegions.ChronoRegion.Updating
+   O: gui.increaseChronoByOne()
+
+
+ENTER:
+   N: top.ConcurrentRegions.CountingRegion.CountingSeconds
+   O: gui.increaseTimeByOne()
+
+ENTER:
+   N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
+   O: gui.refreshChronoDisplay()
+
+
 TRANSITION:
-    S: top.CountingSeconds
-    N: top.CountingSeconds
+    S: top.ConcurrentRegions.CountingRegion.CountingSeconds
+    N: top.ConcurrentRegions.CountingRegion.CountingSeconds
     T: 1
 
 TRANSITION:
-    S: top.NotHighLightingBackground
-    N: top.HighlightingBackground
+    S: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
+    N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
     E: topRightPressed
 
 TRANSITION:
-    S: top.HighlightingBackground
-    N: top.StillHighlighting
+    S: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
+    N: top.ConcurrentRegions.HighlightRegion.StillHighlighting
     E: topRightReleased
 
 TRANSITION:
-    S: top.StillHighlighting
-    N: top.HighlightingBackground
+    S: top.ConcurrentRegions.HighlightRegion.StillHighlighting
+    N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
     E: topRightPressed
 
 TRANSITION:
-    S: top.StillHighlighting
-    N: top.NotHighLightingBackground
+    S: top.ConcurrentRegions.HighlightRegion.StillHighlighting
+    N: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
     T: 2
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
+    E: topLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
+    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    E: topLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    T: 0.5
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
+    N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
+    T: 0.01
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.NotUpdating
+    N: top.ConcurrentRegions.ChronoRegion.Updating
+    E: bottomRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.Updating
+    N: top.ConcurrentRegions.ChronoRegion.NotUpdating
+    E: bottomRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.Updating
+    N: top.ConcurrentRegions.ChronoRegion.Updating
+    T: 0.01
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.NotUpdating
+    N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
+    E: bottomLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.Updating
+    N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
+    E: bottomLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.ChronoRegion.ClearingChrono
+    N: top.ConcurrentRegions.ChronoRegion.NotUpdating
+    E: bottomLeftReleased
