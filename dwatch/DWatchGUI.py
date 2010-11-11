@@ -4,6 +4,7 @@ from LowLevelGUI import *
 class DWatchGUI:
   def __init__(self, parent, eventhandler):
     self.GUI = LowLevelGUI(parent, self)
+    
     self.eventhandler = eventhandler
 
   # -----------------------------------

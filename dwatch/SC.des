@@ -1,6 +1,6 @@
 STATECHART:
     top [DS]
-        ConcurrentRegions [DS]
+        ConcurrentRegions
             CountingRegion [CS] [DS]
                 CountingSeconds [DS]
             HighlightRegion [CS] [DS]
@@ -14,10 +14,21 @@ STATECHART:
                 NotUpdating [DS]
                 Updating
                 ClearingChrono
+            SelectRegion [CS] [DS]
+                WaitingBottomRight [DS]
+                Waiting
+                PressingBottomRight
+                Editing
+                PressingBottomLeft
+        Initializing [DS]
 
 ENTER:
    N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
    O: gui.resetChrono()
+
+EXIT:
+   S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
+   O: gui.selectNext()
 
 ENTER:
    N: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
@@ -26,6 +37,12 @@ ENTER:
 ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
    O: gui.refreshTimeDisplay()
+gui.mode = 'normal'
+
+ENTER:
+   N: top.Initializing
+   O: gui.mode = 'normal'
+gui.selecting = False
 
 ENTER:
    N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
@@ -43,12 +60,13 @@ ENTER:
 ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
    O: gui.refreshChronoDisplay()
-
+gui.mode = 'chrono'
 
 TRANSITION:
     S: top.ConcurrentRegions.CountingRegion.CountingSeconds
     N: top.ConcurrentRegions.CountingRegion.CountingSeconds
     T: 1
+    C: gui.selecting == False
 
 TRANSITION:
     S: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
@@ -83,7 +101,7 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
     N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
-    T: 0.5
+    T: 0.1
 
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
@@ -94,11 +112,13 @@ TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.NotUpdating
     N: top.ConcurrentRegions.ChronoRegion.Updating
     E: bottomRightPressed
+    C: gui.mode == 'chrono'
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.Updating
     N: top.ConcurrentRegions.ChronoRegion.NotUpdating
     E: bottomRightPressed
+    C: gui.mode == 'chrono'
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.Updating
@@ -109,13 +129,72 @@ TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.NotUpdating
     N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
     E: bottomLeftPressed
+    C: gui.mode == 'chrono'
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.Updating
     N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
     E: bottomLeftPressed
+    C: gui.mode == 'chrono'
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.ClearingChrono
     N: top.ConcurrentRegions.ChronoRegion.NotUpdating
     E: bottomLeftReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+    N: top.ConcurrentRegions.SelectRegion.Waiting
+    E: bottomRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.Waiting
+    N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+    E: bottomRightReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.Waiting
+    N: top.ConcurrentRegions.SelectRegion.Editing
+    T: 1.5
+    O: gui.selecting = True
+gui.startSelection
+
+TRANSITION:
+    S: top.Initializing
+    N: top.ConcurrentRegions.HighlightRegion
+    T: 0
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.Editing
+    N: top.ConcurrentRegions.SelectRegion.PressingBottomLeft
+    E: bottomLeftPressed
+    O: gui.increaseSelection()
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.PressingBottomLeft
+    N: top.ConcurrentRegions.SelectRegion.Editing
+    E: bottomLeftReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.PressingBottomLeft
+    N: top.ConcurrentRegions.SelectRegion.PressingBottomLeft
+    T: 0.3
+    O: gui.increaseSelection()
+
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.Editing
+    N: top.ConcurrentRegions.SelectRegion.PressingBottomRight
+    E: bottomRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
+    N: top.ConcurrentRegions.SelectRegion.Editing
+    E: bottomRightReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
+    N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+    T: 2
+    O: gui.stopSelection()
+gui.selecting = False
