@@ -20,8 +20,12 @@ STATECHART:
                 PressingBottomLeft
             AlarmingRegion [CS] [DS]
                 WaitingAlarm [DS]
-                Alarming
                 StoppingAlarming
+                Alarming
+            BatteryDiesRegion [CS] [DS]
+                WaitingBatteryToEmpty [DS]
+                BeingDead
+                BeingAlive
         Initializing [DS]
 
 ENTER:
@@ -29,20 +33,9 @@ ENTER:
    O: gui.resetChrono()
 
 ENTER:
-   N: top.ConcurrentRegions.AlarmingRegion.Alarming
-   O: if gui.numBlinks % 2:
-    gui.setIndiglo()
-else:
-    gui.unsetIndiglo()
-
-gui.numBlinks--
-
-ENTER:
-   N: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
-   O: gui.mode = 'alarm'
-gui.alarmSet = not gui.alarmSet
-gui.setAlarm()
-gui.refreshAlarmDisplay()
+   N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+   O: gui.GUI.drawDate(override='88/88/88')
+gui.GUI.drawTime(override='88:88:88')
 
 ENTER:
    N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
@@ -51,18 +44,40 @@ gui.selecting = False
 
 
 ENTER:
-   N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
-   O: gui.unsetIndiglo()
-
-EXIT:
-   S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
-   O: gui.selectNext()
-
-ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
    O: gui.refreshTimeDisplay()
 gui.refreshDateDisplay()
 gui.mode = 'normal'
+
+ENTER:
+   N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+   O: gui.unsetIndiglo()
+
+ENTER:
+   N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+   O: print "alarm is set:", gui.alarmSet
+
+ENTER:
+   N: top.ConcurrentRegions.ChronoRegion.Updating
+   O: gui.increaseChronoByOne()
+
+
+ENTER:
+   N: top.ConcurrentRegions.AlarmingRegion.Alarming
+   O: gui.setIndigloByValue(gui.numBlinks%2)
+gui.numBlinks = gui.numBlinks-1
+
+
+ENTER:
+   N: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
+   O: gui.mode = 'alarm'
+gui.alarmSet = not gui.alarmSet
+gui.setAlarm()
+gui.refreshAlarmDisplay()
+
+EXIT:
+   S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
+   O: gui.selectNext()
 
 ENTER:
    N: top.Initializing
@@ -71,22 +86,13 @@ gui.selecting = False
 gui.alarmSet = False
 
 ENTER:
-   N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
-   O: gui.checkTime()
-
-ENTER:
-   N: top.ConcurrentRegions.CountingRegion.CountingSeconds
-   O: gui.increaseTimeByOne()
-
-ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
    O: gui.refreshChronoDisplay()
 gui.mode = 'chrono'
 
 ENTER:
-   N: top.ConcurrentRegions.ChronoRegion.Updating
-   O: gui.increaseChronoByOne()
-
+   N: top.ConcurrentRegions.CountingRegion.CountingSeconds
+   O: gui.increaseTimeByOne()
 
 TRANSITION:
     S: top.ConcurrentRegions.CountingRegion.CountingSeconds
@@ -240,6 +246,7 @@ TRANSITION:
     S: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
     N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
     T: 1
+    O: gui.checkTime()
 
 TRANSITION:
     S: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
@@ -288,3 +295,19 @@ TRANSITION:
     S: top.Initializing
     N: top.ConcurrentRegions.CountingRegion
     T: 0
+
+TRANSITION:
+    S: top.ConcurrentRegions.BatteryDiesRegion.WaitingBatteryToEmpty
+    N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+    T: 15
+    C: random.random() < 0.25
+
+TRANSITION:
+    S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+    N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+    T: 0
+
+TRANSITION:
+    S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+    N: top.ConcurrentRegions.BatteryDiesRegion.BeingAlive
+    E: rechargeBatteryRequested

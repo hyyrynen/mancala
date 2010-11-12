@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8' ?>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Nov 12 17:36:59 EET 2010'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Nov 12 20:55:40 EET 2010'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.30.1(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -306,35 +306,11 @@
                             <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA2'/>
                           </UML:StateVertex.incoming>
                           <UML:State.entry>
-                            <UML:UninterpretedAction xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B86'
+                            <UML:UninterpretedAction xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B1D'
                               isSpecification = 'false' isAsynchronous = 'false'>
                               <UML:Action.script>
-                                <UML:ActionExpression xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BB0'
-                                  language = '' body = 'gui.checkTime()'/>
-                              </UML:Action.script>
-                            </UML:UninterpretedAction>
-                          </UML:State.entry>
-                        </UML:SimpleState>
-                        <UML:SimpleState xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B88'
-                          name = 'Alarming' isSpecification = 'false'>
-                          <UML:StateVertex.outgoing>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B97'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B9C'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA3'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA4'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA5'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA6'/>
-                          </UML:StateVertex.outgoing>
-                          <UML:StateVertex.incoming>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B8A'/>
-                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B97'/>
-                          </UML:StateVertex.incoming>
-                          <UML:State.entry>
-                            <UML:UninterpretedAction xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B92'
-                              isSpecification = 'false' isAsynchronous = 'false'>
-                              <UML:Action.script>
-                                <UML:ActionExpression xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B96'
-                                  language = '' body = 'if gui.numBlinks % 2:&#10;    gui.setIndiglo()&#10;else:&#10;    gui.unsetIndiglo()&#10;&#10;gui.numBlinks--'/>
+                                <UML:ActionExpression xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B1E'
+                                  language = '' body = 'print &quot;alarm is set:&quot;, gui.alarmSet'/>
                               </UML:Action.script>
                             </UML:UninterpretedAction>
                           </UML:State.entry>
@@ -360,6 +336,89 @@
                               </UML:Action.script>
                             </UML:UninterpretedAction>
                           </UML:State.entry>
+                        </UML:SimpleState>
+                        <UML:SimpleState xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B88'
+                          name = 'Alarming' isSpecification = 'false'>
+                          <UML:StateVertex.outgoing>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B97'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B9C'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA3'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA4'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA5'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000BA6'/>
+                          </UML:StateVertex.outgoing>
+                          <UML:StateVertex.incoming>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B8A'/>
+                            <UML:Transition xmi.idref = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B97'/>
+                          </UML:StateVertex.incoming>
+                          <UML:State.entry>
+                            <UML:UninterpretedAction xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000B18'
+                              isSpecification = 'false' isAsynchronous = 'false'>
+                              <UML:Action.script>
+                                <UML:ActionExpression xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000B1A'
+                                  language = '' body = 'gui.setIndigloByValue(gui.numBlinks%2)&#10;gui.numBlinks = gui.numBlinks-1&#10;'/>
+                              </UML:Action.script>
+                            </UML:UninterpretedAction>
+                          </UML:State.entry>
+                        </UML:SimpleState>
+                      </UML:CompositeState.subvertex>
+                    </UML:CompositeState>
+                    <UML:CompositeState xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD5'
+                      name = 'BatteryDiesRegion' isSpecification = 'false' isConcurrent = 'false'>
+                      <UML:CompositeState.subvertex>
+                        <UML:Pseudostate xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD6'
+                          isSpecification = 'false' kind = 'initial'>
+                          <UML:StateVertex.outgoing>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD8'/>
+                          </UML:StateVertex.outgoing>
+                        </UML:Pseudostate>
+                        <UML:SimpleState xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD7'
+                          name = 'WaitingBatteryToEmpty' isSpecification = 'false'>
+                          <UML:StateVertex.outgoing>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDA'/>
+                          </UML:StateVertex.outgoing>
+                          <UML:StateVertex.incoming>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD8'/>
+                          </UML:StateVertex.incoming>
+                        </UML:SimpleState>
+                        <UML:SimpleState xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'
+                          name = 'BeingDead' isSpecification = 'false'>
+                          <UML:StateVertex.outgoing>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFB'/>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FF5'/>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFF'/>
+                          </UML:StateVertex.outgoing>
+                          <UML:StateVertex.incoming>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFB'/>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDA'/>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FF5'/>
+                          </UML:StateVertex.incoming>
+                          <UML:State.entry>
+                            <UML:UninterpretedAction xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001001'
+                              isSpecification = 'false' isAsynchronous = 'false'>
+                              <UML:Action.script>
+                                <UML:ActionExpression xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001002'
+                                  language = '' body = 'gui.GUI.drawDate(override=&apos;88/88/88&apos;)&#10;gui.GUI.drawTime(override=&apos;88:88:88&apos;)'/>
+                              </UML:Action.script>
+                            </UML:UninterpretedAction>
+                          </UML:State.entry>
+                          <UML:State.internalTransition>
+                            <UML:Transition xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFB'
+                              isSpecification = 'false'>
+                              <UML:Transition.source>
+                                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+                              </UML:Transition.source>
+                              <UML:Transition.target>
+                                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+                              </UML:Transition.target>
+                            </UML:Transition>
+                          </UML:State.internalTransition>
+                        </UML:SimpleState>
+                        <UML:SimpleState xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001004'
+                          name = 'BeingAlive' isSpecification = 'false'>
+                          <UML:StateVertex.incoming>
+                            <UML:Transition xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFF'/>
+                          </UML:StateVertex.incoming>
                         </UML:SimpleState>
                       </UML:CompositeState.subvertex>
                     </UML:CompositeState>
@@ -896,6 +955,15 @@
             </UML:Transition>
             <UML:Transition xmi.id = '127-0-0-1-22732f0b:12c404cfc12:-8000:0000000000000B89'
               isSpecification = 'false'>
+              <UML:Transition.effect>
+                <UML:CallAction xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B14'
+                  isSpecification = 'false' isAsynchronous = 'false'>
+                  <UML:Action.script>
+                    <UML:ActionExpression xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B15'
+                      language = '' body = 'gui.checkTime()'/>
+                  </UML:Action.script>
+                </UML:CallAction>
+              </UML:Transition.effect>
               <UML:Transition.trigger>
                 <UML:TimeEvent xmi.idref = '127-0-0-1--1647b5b:12c31dba7aa:-8000:000000000000086D'/>
               </UML:Transition.trigger>
@@ -1041,6 +1109,60 @@
                 <UML:CompositeState xmi.idref = '127-0-0-1--14c6db77:12c35c87ba9:-8000:0000000000000C96'/>
               </UML:Transition.target>
             </UML:Transition>
+            <UML:Transition xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD8'
+              isSpecification = 'false'>
+              <UML:Transition.source>
+                <UML:Pseudostate xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD6'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD7'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDA'
+              isSpecification = 'false'>
+              <UML:Transition.guard>
+                <UML:Guard xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDE'
+                  isSpecification = 'false'>
+                  <UML:Guard.expression>
+                    <UML:BooleanExpression xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001008'
+                      language = '' body = 'random.random() &lt; 0.25'/>
+                  </UML:Guard.expression>
+                </UML:Guard>
+              </UML:Transition.guard>
+              <UML:Transition.trigger>
+                <UML:TimeEvent xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDB'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD7'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FF5'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:TimeEvent xmi.idref = '127-0-1-1-1335fe3e:12c3afbee7d:-8000:0000000000000BE3'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+              </UML:Transition.target>
+            </UML:Transition>
+            <UML:Transition xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FFF'
+              isSpecification = 'false'>
+              <UML:Transition.trigger>
+                <UML:SignalEvent xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001000'/>
+              </UML:Transition.trigger>
+              <UML:Transition.source>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FD9'/>
+              </UML:Transition.source>
+              <UML:Transition.target>
+                <UML:SimpleState xmi.idref = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001004'/>
+              </UML:Transition.target>
+            </UML:Transition>
           </UML:StateMachine.transitions>
         </UML:StateMachine>
         <UML:TimeEvent xmi.id = '127-0-0-1--1647b5b:12c31dba7aa:-8000:000000000000086D'
@@ -1147,12 +1269,29 @@
               language = '' body = '0.5'/>
           </UML:TimeEvent.when>
         </UML:TimeEvent>
+        <UML:SignalEvent xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B23'
+          name = 'gui.numBlinks-=1' isSpecification = 'false'/>
+        <UML:SignalEvent xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000B13'
+          name = 'gui.numBlinks-=1' isSpecification = 'false'/>
+        <UML:TimeEvent xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDB'
+          name = 'FifteenSecondsTimeEvent' isSpecification = 'false'>
+          <UML:TimeEvent.when>
+            <UML:TimeExpression xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FDD'
+              language = '' body = '15'/>
+          </UML:TimeEvent.when>
+        </UML:TimeEvent>
+        <UML:SignalEvent xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000001000'
+          name = 'rechargeBatteryRequested' isSpecification = 'false'/>
       </UML:Namespace.ownedElement>
     </UML:Model>
     <UML:BooleanExpression xmi.id = '127-0-0-1--22e4084:12c361eedf5:-8000:0000000000000B51'
       language = '' body = 'ConcurrentRegions.RefreshRegionin RefreshingChrono'/>
     <UML:ActionExpression xmi.id = '127-0-1-1-1335fe3e:12c3afbee7d:-8000:0000000000000B73'
       language = '' body = 'gui.startSelection() &#10;'/>
+    <UML:ActionExpression xmi.id = '127-0-0-1--32d352e9:12c40fb82d2:-8000:0000000000000B20'
+      language = '' body = 'gui.setIndigloByValue(gui.numblinks%2)&#10;gui.numBlinks-=1'/>
+    <UML:ActionExpression xmi.id = '127-0-0-1--4c859fa3:12c412aaeec:-8000:0000000000000FF9'
+      language = '' body = 'gui.GUI.drawDate([&apos;88&apos;,&apos;88&apos;,&apos;88&apos;])&#10;gui.GUI.drawTime([&apos;88&apos;,&apos;88&apos;,&apos;88&apos;])'/>
     <UML:CallAction xmi.id = '127-0-0-1--1647b5b:12c31dba7aa:-8000:00000000000008BE'
       isSpecification = 'false' isAsynchronous = 'false'>
       <UML:Action.script>

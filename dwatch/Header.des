@@ -1,6 +1,7 @@
 INITIALIZER:
     from Tkinter import *
     from DWatchGUI import DWatchGUI
+    import random
 
     root = Tk()
     root.title("watch")

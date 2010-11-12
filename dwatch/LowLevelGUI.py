@@ -107,7 +107,11 @@ class LowLevelGUI:
                                                                 fill='')
                                                                                                                                   
     self.displayCanvas.bind("<ButtonPress-1>", self.mouse1Click)
-    self.displayCanvas.bind("<ButtonRelease-1>", self.mouse1Release)                                                              
+    self.displayCanvas.bind("<ButtonRelease-1>",self.mouse1Release)                                                              
+    self.displayCanvas.bind("p", self.rechargeBattery)
+
+  def rechargeBattery(self, event):
+    self.controller.rechargeBatteryRequested()
 
   def mouse1Click(self, event):
     X = self.displayCanvas.canvasx(event.x)
@@ -370,7 +374,7 @@ class LowLevelGUI:
   
     
                       
-  def drawTime(self, toDraw=["hours","minutes","seconds"]):    
+  def drawTime(self, toDraw=["hours","minutes","seconds"], override=False):    
     timeToDraw = self.__getTimeAsString()
     
     if "hours" not in toDraw:
@@ -379,6 +383,9 @@ class LowLevelGUI:
       timeToDraw=timeToDraw[0:3]+"  "+timeToDraw[5:]
     if "seconds" not in toDraw:
       timeToDraw=timeToDraw[0:6]+"  "
+
+    if override != False:
+        timeToDraw = override
       
     self.clearDisplay()     
       
@@ -412,7 +419,7 @@ class LowLevelGUI:
   def resetChrono(self):
     self.curChrono=[0,0,0]
                                            
-  def drawDate(self, toDraw=["years","months","days"]):
+  def drawDate(self, toDraw=["years","months","days"], override = False):
     dateToDraw = self.__getDateAsString()
     
     if "months" not in toDraw:
@@ -421,7 +428,10 @@ class LowLevelGUI:
       dateToDraw=dateToDraw[0:3]+"  "+dateToDraw[5:]           
     if "years" not in toDraw:
       dateToDraw=dateToDraw[0:6]+"  "
-      
+     
+    if override != False:
+        dateToDraw = override
+
     self.clearDate()
  
     self.dateTag=self.displayCanvas.create_text(RECT_X1-33,
