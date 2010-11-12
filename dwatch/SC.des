@@ -3,13 +3,11 @@ STATECHART:
         ConcurrentRegions
             CountingRegion [CS] [DS]
                 CountingSeconds [DS]
-            HighlightRegion [CS] [DS]
-                HighlightingBackground
-                StillHighlighting
-                NotHighLightingBackground [DS]
             RefreshRegion [CS] [DS]
                 RefreshingNormal [DS]
                 RefreshingChrono
+                PressingBottomLeft
+                DisplayingAlarm
             ChronoRegion [CS] [DS]
                 NotUpdating [DS]
                 Updating
@@ -20,38 +18,61 @@ STATECHART:
                 PressingBottomRight
                 Editing
                 PressingBottomLeft
+            AlarmingRegion [CS] [DS]
+                WaitingAlarm [DS]
+                Alarming
+                StoppingAlarming
         Initializing [DS]
 
 ENTER:
    N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
    O: gui.resetChrono()
 
+ENTER:
+   N: top.ConcurrentRegions.AlarmingRegion.Alarming
+   O: if gui.numBlinks % 2:
+    gui.setIndiglo()
+else:
+    gui.unsetIndiglo()
+
+gui.numBlinks--
+
+ENTER:
+   N: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
+   O: gui.mode = 'alarm'
+gui.alarmSet = not gui.alarmSet
+gui.setAlarm()
+gui.refreshAlarmDisplay()
+
+ENTER:
+   N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+   O: gui.stopSelection()
+gui.selecting = False
+
+
+ENTER:
+   N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+   O: gui.unsetIndiglo()
+
 EXIT:
    S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
    O: gui.selectNext()
 
 ENTER:
-   N: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
-   O: gui.unsetIndiglo()
-
-ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
    O: gui.refreshTimeDisplay()
+gui.refreshDateDisplay()
 gui.mode = 'normal'
 
 ENTER:
    N: top.Initializing
    O: gui.mode = 'normal'
 gui.selecting = False
+gui.alarmSet = False
 
 ENTER:
-   N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
-   O: gui.setIndiglo()
-
-ENTER:
-   N: top.ConcurrentRegions.ChronoRegion.Updating
-   O: gui.increaseChronoByOne()
-
+   N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+   O: gui.checkTime()
 
 ENTER:
    N: top.ConcurrentRegions.CountingRegion.CountingSeconds
@@ -62,36 +83,22 @@ ENTER:
    O: gui.refreshChronoDisplay()
 gui.mode = 'chrono'
 
+ENTER:
+   N: top.ConcurrentRegions.ChronoRegion.Updating
+   O: gui.increaseChronoByOne()
+
+
 TRANSITION:
     S: top.ConcurrentRegions.CountingRegion.CountingSeconds
     N: top.ConcurrentRegions.CountingRegion.CountingSeconds
     T: 1
-    C: gui.selecting == False
-
-TRANSITION:
-    S: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
-    N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
-    E: topRightPressed
-
-TRANSITION:
-    S: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
-    N: top.ConcurrentRegions.HighlightRegion.StillHighlighting
-    E: topRightReleased
-
-TRANSITION:
-    S: top.ConcurrentRegions.HighlightRegion.StillHighlighting
-    N: top.ConcurrentRegions.HighlightRegion.HighlightingBackground
-    E: topRightPressed
-
-TRANSITION:
-    S: top.ConcurrentRegions.HighlightRegion.StillHighlighting
-    N: top.ConcurrentRegions.HighlightRegion.NotHighLightingBackground
-    T: 2
+    C: not (gui.mode == 'normal' and gui.selecting == True)
 
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
     N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
     E: topLeftPressed
+    C: gui.selecting == False
 
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
@@ -101,7 +108,8 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
     N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
-    T: 0.1
+    T: 0.5
+    C: gui.selecting == False
 
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
@@ -146,6 +154,7 @@ TRANSITION:
     S: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
     N: top.ConcurrentRegions.SelectRegion.Waiting
     E: bottomRightPressed
+    C: gui.mode == 'normal'
 
 TRANSITION:
     S: top.ConcurrentRegions.SelectRegion.Waiting
@@ -157,12 +166,7 @@ TRANSITION:
     N: top.ConcurrentRegions.SelectRegion.Editing
     T: 1.5
     O: gui.selecting = True
-gui.startSelection
-
-TRANSITION:
-    S: top.Initializing
-    N: top.ConcurrentRegions.HighlightRegion
-    T: 0
+gui.startSelection()
 
 TRANSITION:
     S: top.ConcurrentRegions.SelectRegion.Editing
@@ -196,5 +200,91 @@ TRANSITION:
     S: top.ConcurrentRegions.SelectRegion.PressingBottomRight
     N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
     T: 2
-    O: gui.stopSelection()
-gui.selecting = False
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.Editing
+    N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+    T: 5
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    N: top.ConcurrentRegions.RefreshRegion.PressingBottomLeft
+    E: bottomLeftPressed
+    C: gui.selecting == False
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.PressingBottomLeft
+    N: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
+    E: bottomLeftReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
+    N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
+    E: bottomLeftPressed
+    C: gui.selecting == False
+
+TRANSITION:
+    S: top.ConcurrentRegions.RefreshRegion.PressingBottomLeft
+    N: top.ConcurrentRegions.RefreshRegion.DisplayingAlarm
+    T: 1.5
+    O: gui.eventhandler.event('alarmStartEdit')
+
+TRANSITION:
+    S: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
+    N: top.ConcurrentRegions.SelectRegion.Editing
+    E: alarmStartEdit
+    O: gui.selecting = True
+gui.startSelection()
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+    N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+    T: 1
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+    N: top.ConcurrentRegions.AlarmingRegion.Alarming
+    E: alarmStart
+    C: gui.alarmSet
+    O: gui.numBlinks = 8
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.Alarming
+    T: 0.5
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    T: 0
+    C: gui.numBlinks == 0
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
+    T: 0
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    E: topRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    E: topLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    E: bottomLeftPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.AlarmingRegion.Alarming
+    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
+    E: bottomRightPressed
+
+TRANSITION:
+    S: top.Initializing
+    N: top.ConcurrentRegions.CountingRegion
+    T: 0
