@@ -26,6 +26,10 @@ STATECHART:
                 WaitingBatteryToEmpty [DS]
                 BeingDead
                 BeingAlive
+            HighlightingRegion [CS] [DS]
+                WaitingSomeTime
+                PressingTopRight
+                WaitingTopRight [DS]
         Initializing [DS]
 
 ENTER:
@@ -86,8 +90,18 @@ gui.selecting = False
 gui.alarmSet = False
 
 ENTER:
+   N: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
+   O: gui.setIndiglo()
+print 2345
+
+EXIT:
+   S: top.ConcurrentRegions.HighlightingRegion.WaitingSomeTime
+   O: gui.unsetIndiglo()
+
+ENTER:
    N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
    O: gui.refreshChronoDisplay()
+gui.refreshDateDisplay()
 gui.mode = 'chrono'
 
 ENTER:
@@ -137,7 +151,7 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.Updating
     N: top.ConcurrentRegions.ChronoRegion.Updating
-    T: 0.01
+    T: 0.1
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.NotUpdating
@@ -305,9 +319,29 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
     N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
-    T: 0
+    T: 0.01
 
 TRANSITION:
     S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
     N: top.ConcurrentRegions.BatteryDiesRegion.BeingAlive
     E: rechargeBatteryRequested
+
+TRANSITION:
+    S: top.ConcurrentRegions.HighlightingRegion.WaitingTopRight
+    N: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
+    E: topRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
+    N: top.ConcurrentRegions.HighlightingRegion.WaitingSomeTime
+    E: topRightReleased
+
+TRANSITION:
+    S: top.ConcurrentRegions.HighlightingRegion.WaitingSomeTime
+    N: top.ConcurrentRegions.HighlightingRegion.WaitingTopRight
+    T: 2
+
+TRANSITION:
+    S: top.ConcurrentRegions.HighlightingRegion.WaitingSomeTime
+    N: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
+    E: topRightPressed
