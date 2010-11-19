@@ -75,6 +75,13 @@ ENTER:
    O: print "alarm is set:", gui.alarmSet
 
 ENTER:
+   N: top.WatchDead
+   O: gui.GUI.clearDisplay()
+gui.GUI.clearDate()
+
+
+
+ENTER:
    N: top.ConcurrentRegions.ChronoRegion.Updating
    O: gui.increaseChronoByOne()
 
@@ -166,7 +173,7 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.Updating
     N: top.ConcurrentRegions.ChronoRegion.Updating
-    T: 0.1
+    T: 0.01
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.NotUpdating
@@ -364,4 +371,4 @@ TRANSITION:
     S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
     N: top.WatchDead
     T: 0
-    C: gui.deadclicks > 50
+    C: gui.deadclicks > 500
