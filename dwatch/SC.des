@@ -31,6 +31,7 @@ STATECHART:
                 PressingTopRight
                 WaitingTopRight [DS]
         Initializing [DS]
+        WatchDead
 
 ENTER:
    N: top.ConcurrentRegions.ChronoRegion.ClearingChrono
@@ -38,8 +39,15 @@ ENTER:
 
 ENTER:
    N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
-   O: gui.GUI.drawDate(override='88/88/88')
+   O: gui.dead = True
+gui.deadclicks += 1
+gui.GUI.drawDate(override='88/88/88')
 gui.GUI.drawTime(override='88:88:88')
+
+ENTER:
+   N: top.ConcurrentRegions.BatteryDiesRegion.WaitingBatteryToEmpty
+   O: gui.deadclicks = 0
+
 
 ENTER:
    N: top.ConcurrentRegions.SelectRegion.WaitingBottomRight
@@ -56,6 +64,11 @@ gui.mode = 'normal'
 ENTER:
    N: top.ConcurrentRegions.AlarmingRegion.StoppingAlarming
    O: gui.unsetIndiglo()
+
+ENTER:
+   N: top.ConcurrentRegions.BatteryDiesRegion.BeingAlive
+   O: gui.dead = False
+
 
 ENTER:
    N: top.ConcurrentRegions.AlarmingRegion.WaitingAlarm
@@ -88,6 +101,7 @@ ENTER:
    O: gui.mode = 'normal'
 gui.selecting = False
 gui.alarmSet = False
+gui.dead = False
 
 ENTER:
    N: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
@@ -129,12 +143,13 @@ TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
     N: top.ConcurrentRegions.RefreshRegion.RefreshingNormal
     T: 0.5
-    C: gui.selecting == False
+    C: gui.selecting == False and gui.dead == False
 
 TRANSITION:
     S: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
     N: top.ConcurrentRegions.RefreshRegion.RefreshingChrono
     T: 0.01
+    C: gui.dead == False
 
 TRANSITION:
     S: top.ConcurrentRegions.ChronoRegion.NotUpdating
@@ -313,8 +328,7 @@ TRANSITION:
 TRANSITION:
     S: top.ConcurrentRegions.BatteryDiesRegion.WaitingBatteryToEmpty
     N: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
-    T: 15
-    C: random.random() < 0.25
+    T: 75
 
 TRANSITION:
     S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
@@ -345,3 +359,9 @@ TRANSITION:
     S: top.ConcurrentRegions.HighlightingRegion.WaitingSomeTime
     N: top.ConcurrentRegions.HighlightingRegion.PressingTopRight
     E: topRightPressed
+
+TRANSITION:
+    S: top.ConcurrentRegions.BatteryDiesRegion.BeingDead
+    N: top.WatchDead
+    T: 0
+    C: gui.deadclicks > 50
