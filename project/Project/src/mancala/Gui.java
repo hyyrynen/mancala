@@ -133,13 +133,4 @@ public class Gui extends JFrame {
 		this.setSize(600, 400);
 		this.setTitle("Mancala");
 	}
-	
-	/**
-	 * Main function for testing purposes
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Gui gui = new Gui();
-		gui.setVisible(true);
-	}
 }
