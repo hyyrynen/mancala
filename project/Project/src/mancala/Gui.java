@@ -1,6 +1,8 @@
 package mancala;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +18,9 @@ public class Gui extends JFrame {
 	
 	private static int NUM_PLAYERS = 2;
 	private static int NUM_HOUSES_PER_PLAYER = 6;
+	
+	// we need the controller to wire it up with some events
+	private Controller controller;
 	
 	// menu specific variables
 	JMenuBar menuBar;
@@ -57,9 +62,52 @@ public class Gui extends JFrame {
 		mainMenu.addSeparator();
 		mainMenu.add(quitMenuItem);
 		
+		// event-handlers
+		newGameMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.NEW_GAME, null);
+			}
+		});
+		
+		restartGameMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.REMATCH, null);
+			}
+		});
+		
+		playerNamesMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.SET_PLAYER_NAMES, null);
+			}
+		});
+		
+		highscoresMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.SHOW_HIGHSCORES, null);
+			}
+		});
+		
+		quitMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.QUIT, null);
+			}
+		});
+		
 		// help menu
 		helpMenu = new JMenu("Help");
 		helpMenuItem = new JMenuItem("Show manual");
+		
+		helpMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.handleGuiEvent(GuiEvent.SHOW_MANUAL, null);
+			}
+		});
 		
 		helpMenu.add(helpMenuItem);
 		
@@ -125,8 +173,9 @@ public class Gui extends JFrame {
 	/**
 	 * Initializes necessary components of Mancala GUI.
 	 */
-	public Gui() {
+	public Gui(Controller controller) {
 		super();
+		this.controller = controller;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setupStoresAndHouses();
 		this.setupMenus();

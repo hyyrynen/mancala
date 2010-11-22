@@ -7405,3 +7405,6 @@ c3;;i:SvIMI#1F;declaredInPackage;i:0S0ci#92;-;-;i:F5pXf#B09;
 c3;;i:SvIMI#2F;contains;i:SvIMI#1F;-;v:java.lang.Integer:0;i:F5pXf#B09;
 c3;;i:SvIMI#1F;file;i:SvIMI#2F;-;-;i:F5pXf#B09;
 c3;;i:SvIMI#1F;declaredInPackage;i:F5pXf#609;i:0S0ci#92;-;i:F5pXf#B09;
+t;F5pXf#C09;drag;1290455822032;-;;
+c3;;i:ZfU4R#E28;information;v::183;v::222;v:java.lang.String:location_X;i:F5pXf#C09;
+c3;;i:ZfU4R#E28;information;v::329;v::323;v:java.lang.String:location_Y;i:F5pXf#C09;
