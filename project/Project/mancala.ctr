@@ -2992,3 +2992,6 @@ t;V1yqy#EE3;change size;1290443252019;-;;
 c3;;i:g-Sm3#D22;information;v::213;v::178;v:java.lang.String:dimension_Width;i:V1yqy#EE3;
 t;V1yqy#FE3;drag;1290443254404;-;;
 c3;;i:g-Sm3#A52;information;v::555;v::463;v:java.lang.String:location_X;i:V1yqy#FE3;
+t;V1yqy#0F3;drag;1290443376790;-;;
+c3;;i:SvIMI#4F;information;v::594;v::627;v:java.lang.String:location_X;i:V1yqy#0F3;
+c3;;i:SvIMI#4F;information;v::333;v::342;v:java.lang.String:location_Y;i:V1yqy#0F3;
