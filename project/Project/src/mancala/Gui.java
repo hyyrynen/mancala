@@ -44,7 +44,7 @@ public class Gui extends JFrame {
 		
 		// main menu with items
 		mainMenu = new JMenu("Mancala");
-		newGameMenuItem = new JMenuItem("New game");
+		newGameMenuItem = new JMenuItem("Play Player vs Player");
 		restartGameMenuItem = new JMenuItem("Restart game");
 		playerNamesMenuItem = new JMenuItem("Edit player names");
 		highscoresMenuItem = new JMenuItem("Show highscores");
