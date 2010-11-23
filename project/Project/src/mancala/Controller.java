@@ -47,13 +47,26 @@ public class Controller {
 		gui.updateCell(x, 1, Integer.toString(score));
 	}
 	
-	private void updateHouse(boolean firstPlayer, int index, int score) {
+	/**
+	 * 
+	 * @param firstPlayer
+	 * @param index
+	 * @param score
+	 * @param enableCell
+	 */
+	private void updateHouse(boolean firstPlayer, int index, int score, boolean enableCell) {
 		String scoreString = String.valueOf(score);
-		if (firstPlayer) {
-			gui.updateCell(6-index, 2, scoreString);
-		} else {
-			gui.updateCell(index+1, 0, scoreString);
+		
+		int x = 6-index;
+		int y = 2;
+		
+		if (!firstPlayer) {
+			x = index+1;
+			y = 0;
 		}
+		
+		gui.updateCell(x, y, scoreString);
+		gui.enableCell(x, y, enableCell);
 	}
 	
 	/**
@@ -61,19 +74,12 @@ public class Controller {
 	 * and stores and then forces the GUI to update.
 	 */
 	public void refreshDisplay() {
-		Player player1 = null;
-		Player player2 = null;
-		
 		// get the first and second player
-		Iterator<?> iter = app.iteratorOfPlayer();
-		while (iter.hasNext()) {
-			Player player = (Player) iter.next();
-			if (player.isFirstPlayer()) {
-				player1 = player;
-			} else {
-				player2 = player;
-			}
-		}
+		Player player1 = app.getFirstPlayer();
+		Player player2 = app.getSecondPlayer();
+		
+		// whose turn it is
+		boolean firstTurn = (player1.getTurn() != null);
 		
 		// update the stores
 		updateStore(true,  player1.getStore().getSeeds());
@@ -81,8 +87,8 @@ public class Controller {
 		
 		// update the houses
 		for (int i=0 ; i<Gui.NUM_HOUSES_PER_PLAYER ; ++i) {
-			updateHouse(true,  i, player1.getHouse(i).getSeeds());
-			updateHouse(false, i, player2.getHouse(i).getSeeds());
+			updateHouse(true,  i, player1.getHouse(i).getSeeds(), firstTurn);
+			updateHouse(false, i, player2.getHouse(i).getSeeds(), !firstTurn);
 		}
 	}
 	

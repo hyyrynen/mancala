@@ -181,6 +181,16 @@ public class Gui extends JFrame {
 	}
 	
 	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param enabled
+	 */
+	public void enableCell(int x, int y, boolean enabled) {
+		buttonGrid[x][y].setEnabled(enabled);
+	}
+	
+	/**
 	 * Initializes necessary components of Mancala GUI.
 	 */
 	public Gui(Controller controller) {
