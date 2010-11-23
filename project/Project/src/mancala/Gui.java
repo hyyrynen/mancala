@@ -11,9 +11,51 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
+ * This is a regular JButton, but additionally holds the information of
+ * which player owns it and what is the house index this button represents.
+ */
+class MancalaButton extends JButton {
+	private static final long serialVersionUID = -40781832342111414L;
+	
+	/// Does this button belong to first player.
+	private boolean firstPlayer;
+	
+	/// What is the house index of the button as given in the model.
+	private int index;
+	
+	/**
+	 * Create a mancala player button.
+	 * @param text
+	 * @param firstPlayer Does it belong to first player.
+	 * @param index The index of the button as it is in the UML model.
+	 */
+	public MancalaButton(String text, boolean firstPlayer, int index) {
+		super(text);
+		this.setFirstPlayer(firstPlayer);
+		this.setIndex(index);
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setFirstPlayer(boolean firstPlayer) {
+		this.firstPlayer = firstPlayer;
+	}
+
+	public boolean isFirstPlayer() {
+		return firstPlayer;
+	}
+}
+
+/**
  * Mancala GUI class.
  */
-public class Gui extends JFrame {
+public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -1049958103353244632L;
 	
 	private static int NUM_PLAYERS = 2;
@@ -135,8 +177,8 @@ public class Gui extends JFrame {
 		}
 		
 		// setup player name buttons
-		buttonGrid[0][0].setText("Alice");
-		buttonGrid[7][2].setText("Bob");
+		buttonGrid[0][0].setText("Player2");
+		buttonGrid[7][2].setText("Player1");
 		buttonGrid[0][0].setVisible(true);
 		buttonGrid[7][2].setVisible(true);
 		buttonGrid[0][0].setEnabled(false);
@@ -156,8 +198,11 @@ public class Gui extends JFrame {
 		houses = new JButton[Gui.NUM_PLAYERS][Gui.NUM_HOUSES_PER_PLAYER];
 		
 		for (int i=0 ; i<Gui.NUM_HOUSES_PER_PLAYER ; ++i) {
-			houses[0][i] = new JButton("0");
-			houses[1][i] = new JButton("0");
+			houses[0][i] = new MancalaButton("0", false, i);
+			houses[1][i] = new MancalaButton("0", true, 6-i);
+			houses[0][i].addActionListener(this);
+			houses[1][i].addActionListener(this);
+			
 			buttonGrid[i+1][0] = houses[0][i];
 			buttonGrid[i+1][2] = houses[1][i];
 		}
@@ -169,6 +214,16 @@ public class Gui extends JFrame {
 				add(buttonGrid[i][j]);
 			}
 		}
+	}
+	
+	/**
+	 * Handle the clicks on the MancalaButtons.
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		MancalaButton button = (MancalaButton) e.getSource();
+		ClickInfo info = new ClickInfo(button.isFirstPlayer(), button.getIndex());
+		controller.handleGuiEvent(GuiEvent.BUTTON_CLICKED, info);
 	}
 	
 	/**

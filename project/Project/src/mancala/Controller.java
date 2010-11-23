@@ -1,6 +1,5 @@
 package mancala;
 
-import java.util.Iterator;
 
 /**
  * Mancala model-view controller between the Application class and GUI.
@@ -28,6 +27,10 @@ public class Controller {
 			case SHOW_HIGHSCORES:
 				return;
 			case SHOW_MANUAL:
+				return;
+			case BUTTON_CLICKED:
+				ClickInfo info = (ClickInfo)data;
+				System.out.println("Click firstPlayer=" + info.belongsToFirstPlayer() + " index=" + info.getIndex());
 				return;
 			case QUIT:
 				System.out.println("Exiting mancala application");
