@@ -81,7 +81,6 @@ public class Controller {
 		
 		// update the houses
 		for (int i=0 ; i<Gui.NUM_HOUSES_PER_PLAYER ; ++i) {
-			System.out.println("index: " + i);
 			updateHouse(true,  i, player1.getHouse(i).getSeeds());
 			updateHouse(false, i, player2.getHouse(i).getSeeds());
 		}
