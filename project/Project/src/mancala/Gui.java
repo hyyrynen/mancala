@@ -199,7 +199,7 @@ public class Gui extends JFrame implements ActionListener {
 		
 		for (int i=0 ; i<Gui.NUM_HOUSES_PER_PLAYER ; ++i) {
 			houses[0][i] = new MancalaButton("0", false, i);
-			houses[1][i] = new MancalaButton("0", true, 6-i);
+			houses[1][i] = new MancalaButton("0", true, 5-i);
 			houses[0][i].addActionListener(this);
 			houses[1][i].addActionListener(this);
 			

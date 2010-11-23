@@ -31,6 +31,12 @@ public class Controller {
 			case BUTTON_CLICKED:
 				ClickInfo info = (ClickInfo)data;
 				System.out.println("Click firstPlayer=" + info.belongsToFirstPlayer() + " index=" + info.getIndex());
+				if (info.belongsToFirstPlayer()) {
+					app.getFirstPlayer().playHouse(info.getIndex());
+				} else {
+					app.getSecondPlayer().playHouse(info.getIndex());
+				}
+				refreshDisplay();
 				return;
 			case QUIT:
 				System.out.println("Exiting mancala application");
@@ -90,8 +96,10 @@ public class Controller {
 		
 		// update the houses
 		for (int i=0 ; i<Gui.NUM_HOUSES_PER_PLAYER ; ++i) {
-			updateHouse(true,  i, player1.getHouse(i).getSeeds(), firstTurn);
-			updateHouse(false, i, player2.getHouse(i).getSeeds(), !firstTurn);
+			int numseeds1 = player1.getHouse(i).getSeeds();
+			int numseeds2 = player2.getHouse(i).getSeeds();
+			updateHouse(true,  i, numseeds1, firstTurn && numseeds1 != 0);
+			updateHouse(false, i, numseeds2, !firstTurn && numseeds2 != 0);
 		}
 		
 		// update player names
