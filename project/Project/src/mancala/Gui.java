@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  * This is a regular JButton, but additionally holds the information of
@@ -83,6 +84,19 @@ public class Gui extends JFrame implements ActionListener {
 	private static int GRID_WIDTH = 8;
 	private static int GRID_HEIGHT = 3;
 	
+	
+	private void askAndSetPlayerNames() {
+		String firstName = 
+			JOptionPane.showInputDialog("Enter name of the first player", controller.app.getFirstPlayer().getName());
+		String secondName = 
+			JOptionPane.showInputDialog("Enter name of the second player", controller.app.getSecondPlayer().getName());
+		String[] names = new String[2];
+		names[0] = firstName;
+		names[1] = secondName;
+		
+		controller.handleGuiEvent(GuiEvent.SET_PLAYER_NAMES, names);
+	}
+	
 	/**
 	 * Setup menus.
 	 */
@@ -92,7 +106,7 @@ public class Gui extends JFrame implements ActionListener {
 		// main menu with items
 		mainMenu = new JMenu("Mancala");
 		newGameMenuItem = new JMenuItem("Play Player vs Player");
-		restartGameMenuItem = new JMenuItem("Restart game");
+		restartGameMenuItem = new JMenuItem("Rematch");
 		playerNamesMenuItem = new JMenuItem("Edit player names");
 		highscoresMenuItem = new JMenuItem("Show highscores");
 		quitMenuItem = new JMenuItem("Quit Mancala");
@@ -122,7 +136,7 @@ public class Gui extends JFrame implements ActionListener {
 		playerNamesMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.handleGuiEvent(GuiEvent.SET_PLAYER_NAMES, null);
+				askAndSetPlayerNames();
 			}
 		});
 		

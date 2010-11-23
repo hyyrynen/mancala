@@ -23,6 +23,10 @@ public class Controller {
 			case REMATCH:
 				return;
 			case SET_PLAYER_NAMES:
+				String[] names = (String[])data;
+				app.getFirstPlayer().setName(names[0]);
+				app.getSecondPlayer().setName(names[1]);
+				refreshDisplay();
 				return;
 			case SHOW_HIGHSCORES:
 				return;
