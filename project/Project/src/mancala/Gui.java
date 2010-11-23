@@ -17,7 +17,7 @@ public class Gui extends JFrame {
 	private static final long serialVersionUID = -1049958103353244632L;
 	
 	private static int NUM_PLAYERS = 2;
-	private static int NUM_HOUSES_PER_PLAYER = 6;
+	static int NUM_HOUSES_PER_PLAYER = 6;
 	
 	// we need the controller to wire it up with some events
 	private Controller controller;
@@ -168,6 +168,16 @@ public class Gui extends JFrame {
 				add(buttonGrid[i][j]);
 			}
 		}
+	}
+	
+	/**
+	 * Update the cell at given coordinates in the layout with given text.
+	 * @param x
+	 * @param y
+	 * @param text
+	 */
+	public void updateCell(int x, int y, String text) {
+		buttonGrid[x][y].setText(text);
 	}
 	
 	/**
