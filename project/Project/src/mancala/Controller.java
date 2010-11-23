@@ -90,6 +90,10 @@ public class Controller {
 			updateHouse(true,  i, player1.getHouse(i).getSeeds(), firstTurn);
 			updateHouse(false, i, player2.getHouse(i).getSeeds(), !firstTurn);
 		}
+		
+		// update player names
+		gui.updateCell(7, 2, player1.getName());
+		gui.updateCell(0, 0, player2.getName());
 	}
 	
 	/**

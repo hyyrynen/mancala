@@ -165,6 +165,7 @@ public class Gui extends JFrame {
 		// add buttongrid to layout
 		for (int j=0 ; j<Gui.GRID_HEIGHT ; ++j) {
 			for (int i=0 ; i<Gui.GRID_WIDTH ; ++i) {
+				buttonGrid[i][j].setEnabled(false);
 				add(buttonGrid[i][j]);
 			}
 		}
@@ -199,7 +200,7 @@ public class Gui extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setupStoresAndHouses();
 		this.setupMenus();
-		this.setSize(600, 400);
+		this.setSize(800, 400);
 		this.setTitle("Mancala");
 	}
 }
