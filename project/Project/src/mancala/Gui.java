@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  * This is a regular JButton, but additionally holds the information of
@@ -162,6 +164,26 @@ public class Gui extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.handleGuiEvent(GuiEvent.SHOW_MANUAL, null);
+				
+				JFrame manualFrame = new JFrame("Manual");
+			    JPanel panel = new JPanel();
+			    JTextArea jt = new JTextArea("Rules: " + '\n'+
+			    		" 1. Each player controls the six houses and their seeds on his side of the board. " + '\n' +
+			    		"     His score is the number of seeds in the store to his right." + '\n'+'\n'+
+			    		" 2. If the last sown seed lands in the player's store, the player gets an additional move" + '\n' + '\n'+
+			    		" 3. If the last sown seed lands in an empty house owned by the player, and the opposite " + '\n' + 
+			    		"     house contains seeds, both the last seed and the opposite seeds are captured and placed " + '\n' +
+			    		"     into the player's store." + '\n' + '\n' +
+			    		" 4. When one player no longer has any seeds in any of his houses, the game ends." + '\n' +
+			    		"     The player with the most seeds in his store wins.",55,47);
+			    
+			    jt.setEditable(false);
+			    manualFrame.add(panel);
+			    panel.add(jt);
+			    
+			    manualFrame.setSize(525,300);
+			    manualFrame.setResizable(false);
+			    manualFrame.setVisible(true);
 			}
 		});
 		

@@ -7,6 +7,7 @@ package mancala;
 public class Controller {
 	Application app;
 	Gui gui;
+	boolean gameEnd;
 	
 	/**
 	 * Handle Gui events here.
@@ -31,6 +32,7 @@ public class Controller {
 			case SHOW_HIGHSCORES:
 				return;
 			case SHOW_MANUAL:
+				System.out.println("Display manual");
 				return;
 			case BUTTON_CLICKED:
 				ClickInfo info = (ClickInfo)data;
@@ -41,6 +43,10 @@ public class Controller {
 					app.getSecondPlayer().playHouse(info.getIndex());
 				}
 				refreshDisplay();
+				gameEnd = app.checkEnd();
+				System.out.println("Game end=" + gameEnd + '\n');
+				if(gameEnd == true);//game is over
+				
 				return;
 			case QUIT:
 				System.out.println("Exiting mancala application");
