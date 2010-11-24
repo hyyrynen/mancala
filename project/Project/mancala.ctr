@@ -19962,3 +19962,11 @@ c3;;i:1hbEU#FC51;information;v::828;v::790;v:java.lang.String:location_Y;i:1hbEU
 t;1hbEU#5061;drag;1290552701437;-;;
 c3;;i:g-Sm3#A52;information;v::2;v::0;v:java.lang.String:location_X;i:1hbEU#5061;
 c3;;i:g-Sm3#A52;information;v::260;v::261;v:java.lang.String:location_Y;i:1hbEU#5061;
+c5;4;-;-;v:java.lang.Long:5800;-;v::IDSUFFIX;-;
+t;VDLSw#4461;inplace editing;1290561960453;-;;
+c1;;v::de.uni_paderborn.fujaba.asg.ASGInformation;i:VDLSw#5461;-;i:VDLSw#4461;
+c3;;i:1hbEU#3251;aSGInformation;i:VDLSw#5461;-;v:java.lang.String:attrConstraints;i:VDLSw#4461;
+c3;;i:VDLSw#5461;information;v::true;-;v:java.lang.String:collapsed;i:VDLSw#4461;
+t;VDLSw#6461;drag;1290561968859;-;;
+c3;;i:SvIMI#38;information;v::341;v::337;v:java.lang.String:location_X;i:VDLSw#6461;
+c3;;i:SvIMI#38;information;v::25;v::57;v:java.lang.String:location_Y;i:VDLSw#6461;
