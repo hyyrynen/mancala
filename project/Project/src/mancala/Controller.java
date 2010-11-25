@@ -62,11 +62,15 @@ public class Controller {
 					app.getSecondPlayer().playHouse(info.getIndex());
 				}
 				refreshDisplay();
+				
 				app.setGameEnd( app.checkEnd());
 				System.out.println("Game end=" + app.isGameEnd() + '\n');
 				if(app.isGameEnd()== true){//game is over
 					gui.restartGameMenuItem.setEnabled(true);	//enable the rematch menu item
+					disableHouses();
 				}
+
+					
 				return;
 			case QUIT:
 				System.out.println("Exiting mancala application");
@@ -136,6 +140,19 @@ public class Controller {
 		gui.updateCell(7, 2, player1.getName());
 		gui.updateCell(0, 0, player2.getName());
 	}
+	
+	
+	/**
+	 * This method disables the house buttons.
+	 */
+	public void disableHouses() {
+		for (int i=1 ; i<Gui.NUM_HOUSES_PER_PLAYER+1 ; i++) {
+			gui.enableCell(i, 0,false);
+			gui.enableCell(i, 2,false);
+		}
+	}
+	
+	
 	
 	/**
 	 * Model-view controller constructor.
