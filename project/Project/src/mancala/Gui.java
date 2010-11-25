@@ -100,6 +100,7 @@ public class Gui extends JFrame implements ActionListener {
 		controller.handleGuiEvent(GuiEvent.SET_PLAYER_NAMES, names);
 	}
 	
+	
 	/**
 	 * Setup menus.
 	 */
@@ -200,6 +201,12 @@ public class Gui extends JFrame implements ActionListener {
 	
 	/**
 	 * Put the stores and houses onto layout and initialize them.
+	 * (1,0) .. (6,0) are the houses of the second player
+	 * (1,2) .. (6,2) are the houses of the first player
+	 * (0,0)  The name of the second player
+	 * (7,2)  The name of the first player
+	 * (0,1)  The store of the second player
+	 * (7,1)  The store of the first player.
 	 */
 	private void setupStoresAndHouses() {
 		GridLayout layout = new GridLayout(Gui.GRID_HEIGHT, Gui.GRID_WIDTH);
@@ -282,6 +289,13 @@ public class Gui extends JFrame implements ActionListener {
 	 */
 	public void enableCell(int x, int y, boolean enabled) {
 		buttonGrid[x][y].setEnabled(enabled);
+	}
+	
+	
+	public void displayGameOver(String text){
+		JOptionPane gameOver = new JOptionPane();
+		gameOver.setName("GameOver"); 	// not correct
+		gameOver.showMessageDialog(rootPane, text);
 	}
 	
 	/**
