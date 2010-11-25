@@ -68,6 +68,19 @@ public class Controller {
 				if(app.isGameEnd()== true){//game is over
 					gui.restartGameMenuItem.setEnabled(true);	//enable the rematch menu item
 					disableHouses();
+					String winner;
+					if(app.getFirstPlayer().getStore().getSeeds() > app.getSecondPlayer().getStore().getSeeds() )
+						winner = "The winner is " + app.getFirstPlayer().getName();
+					else if( app.getFirstPlayer().getStore().getSeeds() < app.getSecondPlayer().getStore().getSeeds() )
+						winner = "The winner is " + app.getSecondPlayer().getName();
+					else
+						winner = "The game ended with a draw";
+					
+					gui.displayGameOver("Game over" + '\n' +
+							 "Player1: " + app.getFirstPlayer().getStore().getSeeds()+ '\n' +
+						     "Player2: " + app.getSecondPlayer().getStore().getSeeds() + '\n'+
+						     winner );
+						     
 				}
 
 					
