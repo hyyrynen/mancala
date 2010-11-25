@@ -7,7 +7,6 @@ package mancala;
 public class Controller {
 	Application app;
 	Gui gui;
-	boolean gameEnd;
 	
 	/**
 	 * Handle Gui events here.
@@ -19,14 +18,34 @@ public class Controller {
 			case NEW_GAME:
 				System.out.println("Starting new game");
 				app.startGame(false);
+				gui.restartGameMenuItem.setEnabled(false);	//disable the rematch menu item
 				refreshDisplay();
 				return;
 			case REMATCH:
+				if(app.isGameEnd() == true){
+					app.startGame(true);
+					if(app.isFirstPlayerStarts() == true){
+						app.setFirstPlayerStarts(false);
+						app.changeTurn();
+					}
+					else{
+						app.setFirstPlayerStarts(true);
+					}
+					app.setGameEnd(false);
+					gui.restartGameMenuItem.setEnabled(false);	//disable the rematch menu item
+					refreshDisplay();
+				}
+					
 				return;
 			case SET_PLAYER_NAMES:
 				String[] names = (String[])data;
 				app.getFirstPlayer().setName(names[0]);
 				app.getSecondPlayer().setName(names[1]);
+				if(app.getFirstPlayer().getName()=="")
+					app.getFirstPlayer().setName("Player1");
+				if(app.getSecondPlayer().getName()=="")
+					app.getSecondPlayer().setName("Player2");
+				
 				refreshDisplay();
 				return;
 			case SHOW_HIGHSCORES:
@@ -43,10 +62,11 @@ public class Controller {
 					app.getSecondPlayer().playHouse(info.getIndex());
 				}
 				refreshDisplay();
-				gameEnd = app.checkEnd();
-				System.out.println("Game end=" + gameEnd + '\n');
-				if(gameEnd == true);//game is over
-				
+				app.setGameEnd( app.checkEnd());
+				System.out.println("Game end=" + app.isGameEnd() + '\n');
+				if(app.isGameEnd()== true){//game is over
+					gui.restartGameMenuItem.setEnabled(true);	//enable the rematch menu item
+				}
 				return;
 			case QUIT:
 				System.out.println("Exiting mancala application");
