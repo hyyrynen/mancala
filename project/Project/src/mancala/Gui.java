@@ -77,6 +77,7 @@ public class Gui extends JFrame implements ActionListener {
 	JMenuItem quitMenuItem;
 	JMenuItem helpMenuItem;
 	
+	
 	// stores & mancalas
 	JButton[] stores;
 	JButton[][] houses;
@@ -119,6 +120,7 @@ public class Gui extends JFrame implements ActionListener {
 		mainMenu.add(highscoresMenuItem);
 		mainMenu.addSeparator();
 		mainMenu.add(quitMenuItem);
+		restartGameMenuItem.setEnabled(false);
 		
 		// event-handlers
 		newGameMenuItem.addActionListener(new ActionListener() {
