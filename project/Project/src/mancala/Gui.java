@@ -299,11 +299,7 @@ public class Gui extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(this, text);
 	}
 	
-	public void showHighScores(ArrayList entries) {
-		String highscores = "";
-		for (Entry entry : (ArrayList<Entry>)entries) {
-			highscores += entry.getName() + "\t        \t" + entry.getScore() + "\n";
-		}
+	public void showHighScores(String highscores) {
 		JOptionPane.showMessageDialog(this, highscores);
 	}
 	

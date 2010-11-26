@@ -1,13 +1,20 @@
 package mancala;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Mancala model-view controller between the Application class and GUI.
  */
 public class Controller {
+	private final static Logger logger = Logger.getLogger(Controller.class.getName());
+	
 	Application app;
 	Gui gui;
-	
+
 	/**
 	 * Handle Gui events here.
 	 * @param event The gui event
@@ -16,7 +23,8 @@ public class Controller {
 	public void handleGuiEvent(GuiEvent event, Object data) {
 		switch (event) {
 			case NEW_GAME:
-				System.out.println("Starting new game");
+				logger.info("Starting a new game");
+				logger.info("First player is " + app.getFirstPlayer().getName() + " and second player is " + app.getSecondPlayer().getName());
 				app.startGame(false);
 				gui.restartGameMenuItem.setEnabled(false);	//disable the rematch menu item
 				refreshDisplay();
@@ -38,6 +46,7 @@ public class Controller {
 					
 				return;
 			case SET_PLAYER_NAMES:
+				logger.info("Asking users to enter their names");
 				String[] names = (String[])data;
 				app.getFirstPlayer().setName(names[0]);
 				app.getSecondPlayer().setName(names[1]);
@@ -51,21 +60,26 @@ public class Controller {
 					gui.updateCell(0, 0, app.getSecondPlayer().getName());
 				}
 				else
+					logger.info("First player is " + app.getFirstPlayer().getName() + " and second player is " + app.getSecondPlayer().getName());
 					refreshDisplay();
 				
 				return;
 			case SHOW_HIGHSCORES:
-				gui.showHighScores(app.getTopTen());
+				logger.info("Showing highscores");
+				logger.info(this.getHighScoreString(app.getTopTen()));
+				gui.showHighScores(this.getHighScoreString(app.getTopTen()));
 				return;
 			case SHOW_MANUAL:
+				logger.info("User opened the manual");
 				System.out.println("Display manual");
 				return;
 			case BUTTON_CLICKED:
 				ClickInfo info = (ClickInfo)data;
-				System.out.println("Click firstPlayer=" + info.belongsToFirstPlayer() + " index=" + info.getIndex());
 				if (info.belongsToFirstPlayer()) {
+					logger.info(app.getFirstPlayer().getName() + " distributes seeds from house number " + (info.getIndex()+1));
 					app.getFirstPlayer().playHouse(info.getIndex());
 				} else {
+					logger.info(app.getSecondPlayer().getName() + " distributes seeds from house number " + (info.getIndex()+1));
 					app.getSecondPlayer().playHouse(info.getIndex());
 				}
 				refreshDisplay();
@@ -73,6 +87,7 @@ public class Controller {
 				app.setGameEnd( app.checkEnd());
 				System.out.println("Game end=" + app.isGameEnd() + '\n');
 				if(app.isGameEnd()== true){//game is over
+					logger.info("The game ended");
 					gui.restartGameMenuItem.setEnabled(true);	//enable the rematch menu item
 					disableHouses();
 					String winner;
@@ -83,13 +98,18 @@ public class Controller {
 					else
 						winner = "The game ended with a draw";
 					
+					logger.info(winner);
+					
 					gui.displayGameOver("Game over" + '\n' +
 							 app.getFirstPlayer().getName()  + ": " + app.getFirstPlayer().getStore().getSeeds()+ '\n' +
 							 app.getSecondPlayer().getName() + ": " + app.getSecondPlayer().getStore().getSeeds() + '\n'+
 						     winner );
 					
 					app.updateTopTen();
-					gui.showHighScores(app.getTopTen());
+					
+					logger.info("Showing highscores");
+					logger.info(this.getHighScoreString(app.getTopTen()));
+					gui.showHighScores(this.getHighScoreString(app.getTopTen()));
 				}
 
 					
@@ -100,6 +120,14 @@ public class Controller {
 			default:
 				return;
 		}
+	}
+	
+	private String getHighScoreString(ArrayList entries) {
+		String highscores = "";
+		for (Entry entry : (ArrayList<Entry>)entries) {
+			highscores += entry.getName() + "\t        \t" + entry.getScore() + "\n";
+		}
+		return highscores;
 	}
 	
 	/**
@@ -180,6 +208,14 @@ public class Controller {
 	 * Model-view controller constructor.
 	 */
 	public Controller() {
+		logger.setLevel(Level.FINEST);
+		try {
+			logger.addHandler(new FileHandler("mancalalog.txt"));
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		app = new Application();
 		gui = new Gui(this);
 		gui.setVisible(true);
