@@ -3,6 +3,7 @@ package mancala;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -295,7 +296,15 @@ public class Gui extends JFrame implements ActionListener {
 	public void displayGameOver(String text){
 		JOptionPane gameOver = new JOptionPane();
 		gameOver.setName("GameOver"); 	// not correct
-		gameOver.showMessageDialog(rootPane, text);
+		JOptionPane.showMessageDialog(this, text);
+	}
+	
+	public void showHighScores(ArrayList entries) {
+		String highscores = "";
+		for (Entry entry : (ArrayList<Entry>)entries) {
+			highscores += entry.getName() + "\t        \t" + entry.getScore() + "\n";
+		}
+		JOptionPane.showMessageDialog(this, highscores);
 	}
 	
 	/**

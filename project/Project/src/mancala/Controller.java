@@ -55,6 +55,7 @@ public class Controller {
 				
 				return;
 			case SHOW_HIGHSCORES:
+				gui.showHighScores(app.getTopTen());
 				return;
 			case SHOW_MANUAL:
 				System.out.println("Display manual");
@@ -83,10 +84,12 @@ public class Controller {
 						winner = "The game ended with a draw";
 					
 					gui.displayGameOver("Game over" + '\n' +
-							 "Player1: " + app.getFirstPlayer().getStore().getSeeds()+ '\n' +
-						     "Player2: " + app.getSecondPlayer().getStore().getSeeds() + '\n'+
+							 app.getFirstPlayer().getName()  + ": " + app.getFirstPlayer().getStore().getSeeds()+ '\n' +
+							 app.getSecondPlayer().getName() + ": " + app.getSecondPlayer().getStore().getSeeds() + '\n'+
 						     winner );
-						     
+					
+					app.updateTopTen();
+					gui.showHighScores(app.getTopTen());
 				}
 
 					
