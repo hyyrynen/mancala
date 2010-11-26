@@ -46,7 +46,13 @@ public class Controller {
 				if(app.getSecondPlayer().getName()=="")
 					app.getSecondPlayer().setName("Player2");
 				
-				refreshDisplay();
+				if(app.isGameEnd()== true){
+					gui.updateCell(7, 2, app.getFirstPlayer().getName());
+					gui.updateCell(0, 0, app.getSecondPlayer().getName());
+				}
+				else
+					refreshDisplay();
+				
 				return;
 			case SHOW_HIGHSCORES:
 				return;
