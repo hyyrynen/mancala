@@ -12,11 +12,15 @@ import java.util.logging.Logger;
 public class Controller {
 	private final static Logger logger = Logger.getLogger(Controller.class.getName());
 	
+	/// The reference to the Mancala application instance
 	Application app;
+	
+	/// Reference to the GUI
 	Gui gui;
 
 	/**
-	 * Handle Gui events here.
+	 * Handle GUI events.
+	 * 
 	 * @param event The gui event
 	 * @param data Relevant data for event or null otherwise.
 	 */
@@ -122,6 +126,13 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Given a TopTen list from application instance, construct a String that is presentable
+	 * by a popup window.
+	 * 
+	 * @param entries - list containing highscores in correct order.
+	 * @return Textual representation of the highscore list for a popup meassage.
+	 */
 	private String getHighScoreString(ArrayList entries) {
 		String highscores = "";
 		for (Entry entry : (ArrayList<Entry>)entries) {
@@ -132,8 +143,9 @@ public class Controller {
 	
 	/**
 	 * Updates the store with given value of first or second player.
-	 * @param firstPlayer
-	 * @param score
+	 * 
+	 * @param firstPlayer Do we update the store of the first player?
+	 * @param score What is the score we put in there.
 	 */
 	private void updateStore(boolean firstPlayer, int score) {
 		int x = firstPlayer ? 7 : 0; 
@@ -141,11 +153,12 @@ public class Controller {
 	}
 	
 	/**
+	 * Update the house.
 	 * 
-	 * @param firstPlayer
-	 * @param index
-	 * @param score
-	 * @param enableCell
+	 * @param firstPlayer Do we update hte house of the first player?
+	 * @param index Index of the house.
+	 * @param score Score we display in the GUI.
+	 * @param enableCell Should the cell be enabled.
 	 */
 	private void updateHouse(boolean firstPlayer, int index, int score, boolean enableCell) {
 		String scoreString = String.valueOf(score);

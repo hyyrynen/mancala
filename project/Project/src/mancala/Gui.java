@@ -39,33 +39,52 @@ class MancalaButton extends JButton {
 		this.setIndex(index);
 	}
 
+	/**
+	 * Set the index of the button.
+	 * @param index
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
+	/**
+	 * Get the index of the button.
+	 * @return
+	 */	 
 	public int getIndex() {
 		return index;
 	}
 
+	/**
+	 * Set the player of the function.
+	 * @param firstPlayer If true, then assign this button to first player.
+	 */
 	public void setFirstPlayer(boolean firstPlayer) {
 		this.firstPlayer = firstPlayer;
 	}
 
+	/**
+	 * Does this house belongs to the first player.
+	 * @return
+	 */
 	public boolean isFirstPlayer() {
 		return firstPlayer;
 	}
 }
 
 /**
- * Mancala GUI class.
+ * Mancala GUI frame class.
  */
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -1049958103353244632L;
 	
+	/// the number of players
 	private static int NUM_PLAYERS = 2;
+	
+	/// number of houses per player
 	static int NUM_HOUSES_PER_PLAYER = 6;
 	
-	// we need the controller to wire it up with some events
+	/// Gui controller
 	private Controller controller;
 	
 	// menu specific variables
@@ -88,7 +107,9 @@ public class Gui extends JFrame implements ActionListener {
 	private static int GRID_WIDTH = 8;
 	private static int GRID_HEIGHT = 3;
 	
-	
+	/**
+	 * Ask player names through input windows and fire an GUI event to the controller.
+	 */
 	private void askAndSetPlayerNames() {
 		String firstName = 
 			JOptionPane.showInputDialog("Enter name of the first player", controller.app.getFirstPlayer().getName());
@@ -264,6 +285,7 @@ public class Gui extends JFrame implements ActionListener {
 	
 	/**
 	 * Handle the clicks on the MancalaButtons.
+	 * @param e The actionevent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -274,37 +296,47 @@ public class Gui extends JFrame implements ActionListener {
 	
 	/**
 	 * Update the cell at given coordinates in the layout with given text.
-	 * @param x
-	 * @param y
-	 * @param text
+	 * @param x The x coordinate of the button in layout.
+	 * @param y The y coordinate of the button in layout.
+	 * @param text The text to display
 	 */
 	public void updateCell(int x, int y, String text) {
 		buttonGrid[x][y].setText(text);
 	}
 	
 	/**
+	 * Enable/disable a cell.
 	 * 
-	 * @param x
-	 * @param y
-	 * @param enabled
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 * @param enabled If true, then enable, disable otherwise.
 	 */
 	public void enableCell(int x, int y, boolean enabled) {
 		buttonGrid[x][y].setEnabled(enabled);
 	}
 	
-	
+	/**
+	 * Show a GameOver popup containing given text.
+	 * @param text The message to display.
+	 */
 	public void displayGameOver(String text){
 		JOptionPane gameOver = new JOptionPane();
 		gameOver.setName("GameOver"); 	// not correct
 		JOptionPane.showMessageDialog(this, text);
 	}
 	
+	/**
+	 * Show a popup containing highscores
+	 * 
+	 * @param highscores The string to be displayed.
+	 */
 	public void showHighScores(String highscores) {
 		JOptionPane.showMessageDialog(this, highscores);
 	}
 	
 	/**
 	 * Initializes necessary components of Mancala GUI.
+	 * @param controller The controller instance of this Gui instance.
 	 */
 	public Gui(Controller controller) {
 		super();
