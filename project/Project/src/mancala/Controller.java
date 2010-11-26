@@ -25,13 +25,13 @@ public class Controller {
 			case NEW_GAME:
 				logger.info("Starting a new game");
 				logger.info("First player is " + app.getFirstPlayer().getName() + " and second player is " + app.getSecondPlayer().getName());
-				app.startGame(false);
+				app.startGame();
 				gui.restartGameMenuItem.setEnabled(false);	//disable the rematch menu item
 				refreshDisplay();
 				return;
 			case REMATCH:
 				if(app.isGameEnd() == true){
-					app.startGame(true);
+					app.startGame();
 					if(app.isFirstPlayerStarts() == true){
 						app.setFirstPlayerStarts(false);
 						app.changeTurn();
